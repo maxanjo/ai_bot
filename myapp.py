@@ -18,19 +18,19 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-# my_host = 'chatty.guru'
-# host = "localhost"
-# user = "a0130638_darius"
-# password = "09081993"
-# database = "a0130638_chatty"
-# storage = '../../chatty.guru/laravel/storage/app/projects/'
+my_host = 'chatty.guru'
+host = "chatty.guru"
+user = "a0130638_darius"
+password = "09081993"
+database = "a0130638_chatty"
+storage = 'projects/'
 
-my_host = '127.0.0.1:8000'
-host = "localhost"
-user = "root"
-password = ""
-database = "ai"
-storage = '../storage/app/projects/'
+# my_host = '127.0.0.1:8000'
+# host = "localhost"
+# user = "root"
+# password = ""
+# database = "ai"
+# storage = '../storage/app/projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
@@ -56,7 +56,20 @@ def get_project(token):
     finally:
         if (connection.is_connected()):
             cursor.close()
-            
+
+@app.route("/", methods=["GET"])
+def sayHello():
+    return 'hello', 200
+
+@app.route("/exists/<id>", methods=["GET"])
+def exists(id):
+    local_file_path = 'projects/' + id + '/data.json'
+    # Check if the file already exists locally
+    if os.path.exists(local_file_path):
+        return f"File already exists locally."
+    else:
+        return 'not exists'
+
 @app.route("/index/<token>", methods=["GET"])
 def setIndex(token):
     referer = request.headers.get('Referer')

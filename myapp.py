@@ -34,6 +34,27 @@ storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
+@app.route("/project/<token>", methods=["GET"])
+def projectInfo(token):
+    connection = mysql.connector.connect(
+        host=host,
+        user=user,
+        password=password,
+        database=database
+    )
+    try:
+        if connection.is_connected():
+            # join 'projects' and 'ai_settings' tables using the 'project_id' column
+            query = "SELECT p.*, a.* FROM projects p LEFT JOIN ai_settings a ON p.id = a.project_id WHERE p.token = %s"
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, (token,))
+            project = cursor.fetchone()
+            return project
+    except mysql.connector.Error as error:
+        print("Error while retrieving project details: {}".format(error))
+    finally:
+        if (connection.is_connected()):
+            cursor.close()
 
 # define the function to retrieve project details
 def get_project(token):

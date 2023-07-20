@@ -74,8 +74,8 @@ def exists(id):
 def setIndex(token):
     referer = request.headers.get('Referer')
     domain = referer.split('/')[2] if referer else None
-    if domain != my_host:
-        return jsonify({'error_message': f'Forbidden'}), 403
+    # if domain != my_host:
+    #     return jsonify({'error_message': f'Forbidden'}), 403
     project = get_project(token)
     storageProject = f'{storage}{project["id"]}'
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']

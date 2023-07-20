@@ -49,9 +49,13 @@ def projectInfo(token):
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, (token,))
             project = cursor.fetchone()
-            return project
+            if project:
+                return jsonify(project)  # Convert project dictionary to JSON response
+            else:
+                return jsonify({"message": "Project not found"}), 404  # Return a JSON response for not found
     except mysql.connector.Error as error:
         print("Error while retrieving project details: {}".format(error))
+        return jsonify({"message": "Error while retrieving project details"}), 500  # Return a JSON response for server error
     finally:
         if (connection.is_connected()):
             cursor.close()

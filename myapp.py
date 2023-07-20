@@ -124,10 +124,10 @@ def setIndex(token):
    
 
 @app.route("/projects/<token>", methods=["GET"])
-@cross_origin(origin='http://127.0.0.1:8000')
+# @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token):
     project = get_project(token)
-    storageProject = f'../storage/app/projects/{project["id"]}'
+    storageProject = f'{storage}{project["id"]}'
     # check if project exists
     if not project:
         return jsonify({'error': 'Project not found'}), 404    

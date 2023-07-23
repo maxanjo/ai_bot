@@ -9,7 +9,7 @@ from flask_cors import cross_origin
 from langchain import OpenAI
 from requests.exceptions import HTTPError
 import openai
-
+from werkzeug.utils import secure_filename
 import mysql.connector
 from mysql.connector import Error
 
@@ -18,19 +18,19 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-my_host = 'chatty.guru'
-host = "chatty.guru"
-user = "a0130638_darius"
-password = "09081993"
-database = "a0130638_chatty"
-storage = 'projects/'
+# my_host = 'chatty.guru'
+# host = "chatty.guru"
+# user = "a0130638_darius"
+# password = "09081993"
+# database = "a0130638_chatty"
+# storage = 'projects/'
 
-# my_host = '127.0.0.1:8000'
-# host = "localhost"
-# user = "root"
-# password = ""
-# database = "ai"
-# storage = '../storage/app/projects/'
+my_host = '127.0.0.1:8000'
+host = "localhost"
+user = "root"
+password = ""
+database = "ai"
+storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
@@ -85,15 +85,75 @@ def get_project(token):
 @app.route("/", methods=["GET"])
 def sayHello():
     return 'hello', 200
+@app.route("/files/<project_id>", methods=["GET"])
+def list_files(project_id):
+    project_folder = f'{storage}{project_id}'
 
-@app.route("/exists/<id>", methods=["GET"])
-def exists(id):
-    local_file_path = 'projects/' + id + '/data.json'
-    # Check if the file already exists locally
-    if os.path.exists(local_file_path):
-        return f"File already exists locally."
+    # Check if the project folder exists
+    if not os.path.exists(project_folder):
+        return jsonify({"message": "Project folder not found"}), 404
+
+    # Get the list of filenames in the project folder
+    files = os.listdir(project_folder)
+
+    return jsonify({"files": files, 'id': project_id}), 200
+
+@app.route("/remove/<project_id>/<filename>", methods=["DELETE"])
+def remove_file(project_id, filename):
+    project_folder = f'{storage}{project_id}'
+
+    # Check if the project folder exists
+    if not os.path.exists(project_folder):
+        return jsonify({"error": "Project folder not found"}), 404
+
+    file_path = os.path.join(project_folder, filename)
+
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        return jsonify({"error": "File not found"}), 404
+
+    try:
+        # Remove the file
+        os.remove(file_path)
+        return jsonify({"response": "File removed successfully"}), 200
+    except OSError as e:
+        return jsonify({"error": f"Error removing file: {e}"}), 500
+
+@app.route("/store/<id>", methods=["POST"])
+def store_documents(id):
+    # Check if the project folder exists, if not, create it
+    project_folder = f'{storage}{id}'
+    if not os.path.exists(project_folder):
+        os.makedirs(project_folder)
+
+    # Check if files were uploaded
+    if 'files[]' not in request.files:
+        return jsonify({"error": "No files were uploaded"}), 400
+
+    files = request.files.getlist('files[]')
+
+    if not files:
+        return jsonify({"error": "No files were uploaded"}), 400
+
+    saved_files = []
+    for file in files:
+        if file:
+            # Securely generate a filename and save the file to the project folder
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(project_folder, filename))
+            saved_files.append({'name': filename, 'pr_id': id})
+
+    return jsonify({"response": "Files uploaded successfully", "files": saved_files}), 200
+
+@app.route("/exists/<id>/<filename>")
+def check_file_existence(id, filename):
+    storage_folder = f"projects/{id}"
+    file_path = os.path.join(storage_folder, filename)
+
+    if os.path.exists(file_path):
+        return jsonify({"exists": True}), 200
     else:
-        return 'not exists'
+        return jsonify({"exists": False}), 404
 
 @app.route("/index/<token>", methods=["GET"])
 def setIndex(token):

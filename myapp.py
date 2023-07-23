@@ -18,19 +18,19 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-# my_host = 'chatty.guru'
-# host = "chatty.guru"
-# user = "a0130638_darius"
-# password = "09081993"
-# database = "a0130638_chatty"
-# storage = 'projects/'
-
-my_host = '127.0.0.1:8000'
-host = "localhost"
-user = "root"
-password = ""
-database = "ai"
+my_host = 'chatty.guru'
+host = "chatty.guru"
+user = "a0130638_darius"
+password = "09081993"
+database = "a0130638_chatty"
 storage = 'projects/'
+
+# my_host = '127.0.0.1:8000'
+# host = "localhost"
+# user = "root"
+# password = ""
+# database = "ai"
+# storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 

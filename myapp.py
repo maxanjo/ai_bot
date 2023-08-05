@@ -164,24 +164,8 @@ def setIndex(token):
     project = get_project(token)
     storageProject = f'{storage}{project["id"]}'
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
-    temperature = float(project['temperature'])
-    if(project['model'] == 'gpt-3.5-turbo'):
-        llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.4, model_name="gpt-3.5-turbo", max_tokens=512))
-    else:
-        llm_predictor = LLMPredictor(llm=OpenAI(temperature=temperature, model_name=project['model'], max_tokens=project['max_tokens']))
     llama_logger = LlamaLogger()
-    # define prompt helper
-    # set maximum input size
-    max_input_size = project['max_input_size']
-    # set number of output tokens
-    num_output = project['num_output']
-    # set maximum chunk overlap
-    max_chunk_overlap = 20
-    try:
-        prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
-    except IOError as e:
-        return str(e), 400
-    service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_logger=llama_logger)
+    service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
     if not os.path.exists(storageProject):
         return 'Folder does not exist', 422
     if len(os.listdir(storageProject)) == 0:

@@ -18,19 +18,19 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-my_host = 'chatty.guru'
-host = "chatty.guru"
-user = "a0130638_darius"
-password = "09081993"
-database = "a0130638_chatty"
-storage = 'projects/'
-
-# my_host = '127.0.0.1:8000'
-# host = "localhost"
-# user = "root"
-# password = ""
-# database = "ai"
+# my_host = 'chatty.guru'
+# host = "chatty.guru"
+# user = "a0130638_darius"
+# password = "09081993"
+# database = "a0130638_chatty"
 # storage = 'projects/'
+
+my_host = '127.0.0.1:8000'
+host = "localhost"
+user = "root"
+password = ""
+database = "ai"
+storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
@@ -237,7 +237,8 @@ def get_project_details(token):
     num_output = project['num_output']
     # set maximum chunk overlap
     max_chunk_overlap = project['max_chunk_overlap']
-    prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
+    context_window = 4097
+    prompt_helper = PromptHelper(context_window, num_output, max_chunk_overlap)
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_logger=llama_logger)
 
     index = GPTSimpleVectorIndex.load_from_disk(f'{storageProject}/data.json', service_context=service_context)

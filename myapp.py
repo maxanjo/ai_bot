@@ -88,13 +88,10 @@ def sayHello():
 @app.route("/files/<project_id>", methods=["GET"])
 def list_files(project_id):
     project_folder = f'{storage}{project_id}'
-
+    files = []
     # Check if the project folder exists
-    if not os.path.exists(project_folder):
-        return jsonify({"message": "Project folder not found"}), 404
-
-    # Get the list of filenames in the project folder
-    files = os.listdir(project_folder)
+    if os.path.exists(project_folder):
+        files = os.listdir(project_folder)
 
     return jsonify({"files": files, 'id': project_id}), 200
 

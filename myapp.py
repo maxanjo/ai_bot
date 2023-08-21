@@ -12,25 +12,26 @@ import openai
 from werkzeug.utils import secure_filename
 import mysql.connector
 from mysql.connector import Error
+import magic
 
 app = Flask(__name__)
 app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-my_host = 'chatty.guru'
-host = "chatty.guru"
-user = "a0130638_darius"
-password = "09081993"
-database = "a0130638_chatty"
-storage = 'projects/'
-
-# my_host = '127.0.0.1:8000'
-# host = "localhost"
-# user = "root"
-# password = ""
-# database = "ai"
+# my_host = 'chatty.guru'
+# host = "chatty.guru"
+# user = "a0130638_darius"
+# password = "09081993"
+# database = "a0130638_chatty"
 # storage = 'projects/'
+
+my_host = '127.0.0.1:8000'
+host = "localhost"
+user = "root"
+password = ""
+database = "ai"
+storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
@@ -116,6 +117,14 @@ def remove_file(project_id, filename):
     except OSError as e:
         return jsonify({"error": f"Error removing file: {e}"}), 500
 
+ALLOWED_MIME_TYPES = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'text/rtf',
+    'text/plain'
+]
+
 @app.route("/store/<id>", methods=["POST"])
 def store_documents(id):
     # Check if the project folder exists, if not, create it
@@ -135,6 +144,13 @@ def store_documents(id):
     saved_files = []
     for file in files:
         if file:
+            # Check MIME type
+            mime = magic.from_buffer(file.read(1024), mime=True)
+            file.seek(0)  # reset file pointer after reading
+
+            if mime not in ALLOWED_MIME_TYPES:
+                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt."}), 400
+            
             # Securely generate a filename and save the file to the project folder
             filename = secure_filename(file.filename)
             file.save(os.path.join(project_folder, filename))

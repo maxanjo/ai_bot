@@ -2,25 +2,21 @@ from flask import Flask, request, jsonify
 # from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext, SimpleDirectoryReader,  QuestionAnswerPrompt
 # from langchain.chat_models import ChatOpenAI
 # from langchain import OpenAI
-# from llama_index.logger import LlamaLogger
+from llama_index.logger import LlamaLogger
 from llama_index import load_index_from_storage, StorageContext
-import logging
-import sys
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
-
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
+from llama_index.llms import OpenAI
 from llama_index import (
     VectorStoreIndex,
     SimpleDirectoryReader,
     load_index_from_storage,
     StorageContext,
+    ServiceContext
 )
 
-
-from llama_index import SimpleDirectoryReader, VectorStoreIndex, ServiceContext
-from llama_index.logger import LlamaLogger
 import os
+import sys
 from flask_cors import CORS
 from flask_cors import cross_origin
 from requests.exceptions import HTTPError
@@ -243,19 +239,26 @@ def get_project_details(token):
     
         # rebuild storage context
     storage_context = StorageContext.from_defaults(persist_dir=storageProject)
-    # load index
-    index = load_index_from_storage(storage_context, index_id="vector_index")
-    # check if project exists
 
     temperature = float(project['temperature'])
-
+    llm = OpenAI(model=project['model'], temperature=temperature)
+    llama_debug = LlamaDebugHandler(print_trace_on_end=True)
+    callback_manager = CallbackManager([llama_debug])
+    service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     query_text = request.args.get("text", None)
-    query_engine = index.as_query_engine(response_mode=project['response_mode'])
+
+    # load index
+    index = load_index_from_storage(storage_context, index_id="vector_index")
+    query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'])
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
         response = query_engine.query(query_text)
-        result = {'result': response.response}
+        event_pairs = llama_debug.get_llm_inputs_outputs()
+        logs = event_pairs[0][0]
+        content = logs.payload
+        result = {'result': response.response, 'logs': str(event_pairs)}
+        llama_debug.flush_event_logs()
         return jsonify(result), 200
     except Exception as e:
         if isinstance(e.__cause__, openai.error.AuthenticationError):

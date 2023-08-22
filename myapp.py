@@ -12,8 +12,10 @@ from llama_index import (
     SimpleDirectoryReader,
     load_index_from_storage,
     StorageContext,
+    Prompt,
     ServiceContext
 )
+
 
 import os
 import sys
@@ -246,10 +248,14 @@ def get_project_details(token):
     callback_manager = CallbackManager([llama_debug])
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     query_text = request.args.get("text", None)
-
+    prompt = project['prompt']
+    template = (
+        prompt
+    )
+    qa_template = Prompt(template)
     # load index
     index = load_index_from_storage(storage_context, index_id="vector_index")
-    query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'])
+    query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode=project['response_mode'])
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:

@@ -1,18 +1,35 @@
 from flask import Flask, request, jsonify
-from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext, SimpleDirectoryReader,  QuestionAnswerPrompt
-from langchain.chat_models import ChatOpenAI
-from langchain import OpenAI
+# from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext, SimpleDirectoryReader,  QuestionAnswerPrompt
+# from langchain.chat_models import ChatOpenAI
+# from langchain import OpenAI
+# from llama_index.logger import LlamaLogger
+from llama_index import load_index_from_storage, StorageContext
+import logging
+import sys
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
+
+from llama_index import (
+    VectorStoreIndex,
+    SimpleDirectoryReader,
+    load_index_from_storage,
+    StorageContext,
+)
+
+
+from llama_index import SimpleDirectoryReader, VectorStoreIndex, ServiceContext
 from llama_index.logger import LlamaLogger
 import os
 from flask_cors import CORS
 from flask_cors import cross_origin
-from langchain import OpenAI
 from requests.exceptions import HTTPError
-import openai
 from werkzeug.utils import secure_filename
 import mysql.connector
 from mysql.connector import Error
 import magic
+import openai
+import shutil
 
 app = Flask(__name__)
 app.debug = True  # Enable debug mode
@@ -176,7 +193,8 @@ def setIndex(token):
     #     return jsonify({'error_message': f'Forbidden'}), 403
     project = get_project(token)
     storageProject = f'{storage}{project["id"]}'
-    os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
+    os.environ["OPENAI_API_KEY"] = project['open_ai_api_key']
+    openai.api_key = os.environ["OPENAI_API_KEY"]
     llama_logger = LlamaLogger()
     service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
     if not os.path.exists(storageProject):
@@ -184,13 +202,18 @@ def setIndex(token):
     if len(os.listdir(storageProject)) == 0:
         return 'Folder is empty. Add some files', 422
     else:
-        data_file = os.path.join(storageProject, 'data.json')
+        data_file = os.path.join(storageProject, 'data')
         if os.path.exists(data_file):
-            os.remove(data_file)
+            try:
+                shutil.rmtree(data_file)
+            except OSError as e:
+                return jsonify({"error": f"Error removing file: {e}"}), 500
         documents = SimpleDirectoryReader(storageProject).load_data()
         try:
-            index = GPTSimpleVectorIndex.from_documents(documents, service_context=service_context)
-            index.save_to_disk(f'{storageProject}/data.json')
+            index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+            # save index to disk
+            index.set_index_id("vector_index")
+            index.storage_context.persist(f'{storageProject}/data')
         except Exception as e:
             if isinstance(e.__cause__, openai.error.AuthenticationError):
                 return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
@@ -207,63 +230,33 @@ def setIndex(token):
 
 @app.route("/projects/<token>", methods=["GET"])
 # @cross_origin(origin='http://127.0.0.1:8000')
-def get_project_details(token):
-    project = get_project(token)
-    storageProject = f'{storage}{project["id"]}'
-    # check if project exists
+def get_project_details(token): 
+    project = get_project(token)  
+    os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
+    openai.api_key = os.environ["OPENAI_API_KEY"]
+    storageProject = f'{storage}{project["id"]}/data'
     if not project:
         return jsonify({'error': 'Project not found'}), 404    
     # convert description from bytes to string
     if project['description']:
         project['description'] = project['description'].decode()
-
     
-    os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
+        # rebuild storage context
+    storage_context = StorageContext.from_defaults(persist_dir=storageProject)
+    # load index
+    index = load_index_from_storage(storage_context, index_id="vector_index")
+    # check if project exists
 
     temperature = float(project['temperature'])
-    if(project['model'] == 'gpt-3.5-turbo'):
-        llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=temperature, model_name="gpt-3.5-turbo", max_tokens=project['max_tokens']))
-    else:
-        llm_predictor = LLMPredictor(llm=OpenAI(temperature=temperature, model_name=project['model'], max_tokens=project['max_tokens']))
-    
-    llama_logger = LlamaLogger()
-    # define prompt helper
-    # set maximum input size
-    max_input_size = project['max_input_size']
-    # set number of output tokens
-    num_output = project['num_output']
-    # set maximum chunk overlap
-    max_chunk_overlap = project['max_chunk_overlap']
-    context_window = 4097
-    prompt_helper = PromptHelper(context_window, num_output, max_chunk_overlap)
-    service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_logger=llama_logger)
 
-    index = GPTSimpleVectorIndex.load_from_disk(f'{storageProject}/data.json', service_context=service_context)
-
-    # return project details as JSON
     query_text = request.args.get("text", None)
+    query_engine = index.as_query_engine(response_mode=project['response_mode'])
     if query_text is None:
-      return "No text found, please include a ?text=blah parameter in the URL", 400
-    query_history = request.args.get("history", None)
-    if query_history is None:
-      return "No history found, please include a ?history parameter in the URL", 400
-    prompt = project['prompt']
-    if query_history != '':
-        prompt = project['prompt'].replace("{chat_history}", 'History of your conversation: ' + query_history)
-    else:
-        prompt = project['prompt'].replace("{chat_history}", '')
-
-    QA_PROMPT_TMPL = (
-        prompt
-    )
-    QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
-
-  
-    
+        return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
-        response = index.query(query_text, text_qa_template=QA_PROMPT, response_mode=project['response_mode'])
-        result = {'result': response, 'logs': llama_logger.get_logs()}  # prints all logs, which basically includes all LLM inputs and responses
-        llama_logger.reset() 
+        response = query_engine.query(query_text)
+        result = {'result': response.response}
+        return jsonify(result), 200
     except Exception as e:
         if isinstance(e.__cause__, openai.error.AuthenticationError):
             return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
@@ -275,9 +268,73 @@ def get_project_details(token):
             return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
         else:
             return jsonify({'error_message': str(e)}), 500
+    
 
 
-    return jsonify(result), 200
+
+
+
+
+
+
+
+    # if(project['model'] == 'gpt-3.5-turbo'):
+    #     llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=temperature, model_name="gpt-3.5-turbo", max_tokens=project['max_tokens']))
+    # else:
+    #     llm_predictor = LLMPredictor(llm=OpenAI(temperature=temperature, model_name=project['model'], max_tokens=project['max_tokens']))
+    
+    # llama_logger = LlamaLogger()
+    # # define prompt helper
+    # # set maximum input size
+    # max_input_size = project['max_input_size']
+    # # set number of output tokens
+    # num_output = project['num_output']
+    # # set maximum chunk overlap
+    # max_chunk_overlap = project['max_chunk_overlap']
+    # context_window = 4097
+    # prompt_helper = PromptHelper(context_window, num_output, max_chunk_overlap)
+    # service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_logger=llama_logger)
+
+    # index = GPTSimpleVectorIndex.load_from_disk(f'{storageProject}/data.json', service_context=service_context)
+
+    # # return project details as JSON
+    # query_text = request.args.get("text", None)
+    # if query_text is None:
+    #   return "No text found, please include a ?text=blah parameter in the URL", 400
+    # query_history = request.args.get("history", None)
+    # if query_history is None:
+    #   return "No history found, please include a ?history parameter in the URL", 400
+    # prompt = project['prompt']
+    # if query_history != '':
+    #     prompt = project['prompt'].replace("{chat_history}", 'History of your conversation: ' + query_history)
+    # else:
+    #     prompt = project['prompt'].replace("{chat_history}", '')
+
+    # QA_PROMPT_TMPL = (
+    #     prompt
+    # )
+    # QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
+
+  
+    
+    # try:
+    #     response = index.query(query_text, text_qa_template=QA_PROMPT, response_mode=project['response_mode'])
+    #     result = {'result': response, 'logs': llama_logger.get_logs()}  # prints all logs, which basically includes all LLM inputs and responses
+    #     llama_logger.reset() 
+    # except Exception as e:
+    #     if isinstance(e.__cause__, openai.error.AuthenticationError):
+    #         return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
+    #     if isinstance(e.__cause__, openai.error.APIError):
+    #         return jsonify({'error_message': "OpenAI API returned an API Error: " + str(e.__cause__)}), 500
+    #     if isinstance(e.__cause__, openai.error.APIConnectionError ):
+    #         return jsonify({'error_message': "Failed to connect to OpenAI API: " + str(e.__cause__)}), 500
+    #     if isinstance(e.__cause__, openai.error.RateLimitError ):
+    #         return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
+    #     else:
+    #         return jsonify({'error_message': str(e)}), 500
+
+
+    # return jsonify(result), 200
 
 
 if __name__ == '__main__':

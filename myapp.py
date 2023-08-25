@@ -255,7 +255,10 @@ def get_project_details(token):
     qa_template = Prompt(template)
     # load index
     index = load_index_from_storage(storage_context, index_id="vector_index")
-    query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode=project['response_mode'])
+    if(project['response_mode'] == 'compact'):
+        query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode='compact')
+    else:
+        query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'], similarity_top_k=5)  
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:

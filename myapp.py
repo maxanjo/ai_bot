@@ -172,7 +172,7 @@ def store_documents(id):
             file.save(os.path.join(project_folder, filename))
             saved_files.append({'name': filename, 'pr_id': id})
 
-    return jsonify({"response": "Files uploaded successfully", "files": saved_files}), 200
+    return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
 
 @app.route("/exists/<id>/<filename>")
 def check_file_existence(id, filename):

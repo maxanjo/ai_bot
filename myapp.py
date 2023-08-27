@@ -165,14 +165,14 @@ def store_documents(id):
             file.seek(0)  # reset file pointer after reading
 
             if mime not in ALLOWED_MIME_TYPES:
-                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt."}), 400
+                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
             
             # Securely generate a filename and save the file to the project folder
             filename = secure_filename(file.filename)
             file.save(os.path.join(project_folder, filename))
             saved_files.append({'name': filename, 'pr_id': id})
 
-    return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
+    return jsonify({"response": "Files uploaded successfully", "files": saved_files}), 200
 
 @app.route("/exists/<id>/<filename>")
 def check_file_existence(id, filename):

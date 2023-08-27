@@ -137,7 +137,8 @@ ALLOWED_MIME_TYPES = [
     'application/msword',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'text/rtf',
-    'text/plain'
+    'text/plain',
+    'text/csv'
 ]
 
 @app.route("/store/<id>", methods=["POST"])

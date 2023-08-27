@@ -164,8 +164,8 @@ def store_documents(id):
             mime = magic.from_buffer(file.read(1024), mime=True)
             file.seek(0)  # reset file pointer after reading
 
-            if mime not in ALLOWED_MIME_TYPES:
-                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
+            # if mime not in ALLOWED_MIME_TYPES:
+            #     return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
             
             # Securely generate a filename and save the file to the project folder
             filename = secure_filename(file.filename)

@@ -255,9 +255,9 @@ def get_project_details(token):
     qa_template = Prompt(template)
     # load index
     try:
-       app.logger.debug("About to load index from storage...")
+        app.logger.debug("About to load index from storage...")
         index = load_index_from_storage(storage_context, index_id="vector_index")
-       app.logger.debug("Successfully loaded index from storage.")
+        app.logger.debug("Successfully loaded index from storage.")
         
         # ... Your other code ...
     except Exception as e:

@@ -25,7 +25,6 @@ from requests.exceptions import HTTPError
 from werkzeug.utils import secure_filename
 import mysql.connector
 from mysql.connector import Error
-import magic
 import openai
 import shutil
 
@@ -132,14 +131,11 @@ def remove_file(project_id, filename):
     except OSError as e:
         return jsonify({"error": f"Error removing file: {e}"}), 500
 
-ALLOWED_MIME_TYPES = [
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'text/rtf',
-    'text/plain',
-    'text/csv'
-]
+ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
+
+def allowed_file(filename):
+    # Check if the file has an extension and if the extension is in the allowed set
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/store/<id>", methods=["POST"])
 def store_documents(id):
@@ -160,13 +156,8 @@ def store_documents(id):
     saved_files = []
     for file in files:
         if file:
-            # Check MIME type
-            mime = magic.from_buffer(file.read(1024), mime=True)
-            file.seek(0)  # reset file pointer after reading
-
-            # if mime not in ALLOWED_MIME_TYPES:
-            #     return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
-            
+            if not allowed_file(file.filename):
+                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
             # Securely generate a filename and save the file to the project folder
             filename = secure_filename(file.filename)
             file.save(os.path.join(project_folder, filename))

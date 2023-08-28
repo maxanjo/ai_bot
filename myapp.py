@@ -218,7 +218,7 @@ def setIndex(token):
         return 'Index has been created', 200
    
 
-@app.route("/projects/<token>", methods=["GET"])
+@app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token): 
     project = get_project(token)  
@@ -239,7 +239,7 @@ def get_project_details(token):
     llama_debug = LlamaDebugHandler(print_trace_on_end=True)
     callback_manager = CallbackManager([llama_debug])
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
-    query_text = request.args.get("text", None)
+    query_text = request.json.get("text", None)
     prompt = project['prompt']
     template = (
         prompt
@@ -272,70 +272,6 @@ def get_project_details(token):
     result = {'result': response.response, 'logs': str(event_pairs)}
     llama_debug.flush_event_logs()
     return jsonify(result), 200
-
-
-
-
-
-
-
-    # if(project['model'] == 'gpt-3.5-turbo'):
-    #     llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=temperature, model_name="gpt-3.5-turbo", max_tokens=project['max_tokens']))
-    # else:
-    #     llm_predictor = LLMPredictor(llm=OpenAI(temperature=temperature, model_name=project['model'], max_tokens=project['max_tokens']))
-    
-    # llama_logger = LlamaLogger()
-    # # define prompt helper
-    # # set maximum input size
-    # max_input_size = project['max_input_size']
-    # # set number of output tokens
-    # num_output = project['num_output']
-    # # set maximum chunk overlap
-    # max_chunk_overlap = project['max_chunk_overlap']
-    # context_window = 4097
-    # prompt_helper = PromptHelper(context_window, num_output, max_chunk_overlap)
-    # service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_logger=llama_logger)
-
-    # index = GPTSimpleVectorIndex.load_from_disk(f'{storageProject}/data.json', service_context=service_context)
-
-    # # return project details as JSON
-    # query_text = request.args.get("text", None)
-    # if query_text is None:
-    #   return "No text found, please include a ?text=blah parameter in the URL", 400
-    # query_history = request.args.get("history", None)
-    # if query_history is None:
-    #   return "No history found, please include a ?history parameter in the URL", 400
-    # prompt = project['prompt']
-    # if query_history != '':
-    #     prompt = project['prompt'].replace("{chat_history}", 'History of your conversation: ' + query_history)
-    # else:
-    #     prompt = project['prompt'].replace("{chat_history}", '')
-
-    # QA_PROMPT_TMPL = (
-    #     prompt
-    # )
-    # QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
-
-  
-    
-    # try:
-    #     response = index.query(query_text, text_qa_template=QA_PROMPT, response_mode=project['response_mode'])
-    #     result = {'result': response, 'logs': llama_logger.get_logs()}  # prints all logs, which basically includes all LLM inputs and responses
-    #     llama_logger.reset() 
-    # except Exception as e:
-    #     if isinstance(e.__cause__, openai.error.AuthenticationError):
-    #         return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
-    #     if isinstance(e.__cause__, openai.error.APIError):
-    #         return jsonify({'error_message': "OpenAI API returned an API Error: " + str(e.__cause__)}), 500
-    #     if isinstance(e.__cause__, openai.error.APIConnectionError ):
-    #         return jsonify({'error_message': "Failed to connect to OpenAI API: " + str(e.__cause__)}), 500
-    #     if isinstance(e.__cause__, openai.error.RateLimitError ):
-    #         return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
-    #     else:
-    #         return jsonify({'error_message': str(e)}), 500
-
-
-    # return jsonify(result), 200
 
 
 if __name__ == '__main__':

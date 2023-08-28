@@ -255,12 +255,6 @@ def get_project_details(token):
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
         response = query_engine.query(query_text)
-        event_pairs = llama_debug.get_llm_inputs_outputs()
-        logs = event_pairs[0][0]
-        content = logs.payload
-        result = {'result': response.response, 'logs': str(event_pairs)}
-        llama_debug.flush_event_logs()
-        return jsonify(result), 200
     except Exception as e:
         if isinstance(e.__cause__, openai.error.AuthenticationError):
             return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
@@ -272,9 +266,12 @@ def get_project_details(token):
             return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
         else:
             return jsonify({'error_message': str(e)}), 500
-    
-
-
+    event_pairs = llama_debug.get_llm_inputs_outputs()
+    logs = event_pairs[0][0]
+    content = logs.payload
+    result = {'result': response.response, 'logs': str(event_pairs)}
+    llama_debug.flush_event_logs()
+    return jsonify(result), 200
 
 
 

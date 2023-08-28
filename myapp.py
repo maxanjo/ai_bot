@@ -4,8 +4,7 @@ from flask import Flask, request, jsonify
 # from langchain import OpenAI
 from llama_index.logger import LlamaLogger
 from llama_index import load_index_from_storage, StorageContext
-import logging
-logging.basicConfig(level=logging.DEBUG)
+
 from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
 from llama_index.llms import OpenAI
 from llama_index import (
@@ -30,6 +29,11 @@ import openai
 import shutil
 
 app = Flask(__name__)
+
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
+
 app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
@@ -49,6 +53,8 @@ storage = 'projects/'
 # storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
+
+app.logger.debug("Flask app started")
 
 @app.route("/project/<token>", methods=["GET"])
 def projectInfo(token):
@@ -218,7 +224,8 @@ def setIndex(token):
                 return jsonify({'error_message': str(e)}), 500
         return 'Index has been created', 200
    
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 @app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token): 
@@ -248,13 +255,13 @@ def get_project_details(token):
     qa_template = Prompt(template)
     # load index
     try:
-        logging.debug("About to load index from storage...")
+       app.logger.debug("About to load index from storage...")
         index = load_index_from_storage(storage_context, index_id="vector_index")
-        logging.debug("Successfully loaded index from storage.")
+       app.logger.debug("Successfully loaded index from storage.")
         
         # ... Your other code ...
     except Exception as e:
-        logging.error("An error occurred:", exc_info=True)  # Log the full exception traceback
+        app.logger.error("An error occurred:", exc_info=True)  # Log the full exception traceback
     if(project['response_mode'] == 'compact'):
         query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode='compact')
     else:
@@ -262,11 +269,11 @@ def get_project_details(token):
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
-        logging.debug(f"About to make query_engine.query {query_text}")
+        app.logger.debug(f"About to make query_engine.query {query_text}")
         response = query_engine.query(query_text)
-        logging.debug("Successfully made query.")
+        app.logger.debug("Successfully made query.")
     except Exception as e:
-        logging.error("An error occurred:", exc_info=True)
+        app.logger.error("An error occurred:", exc_info=True)
         if isinstance(e.__cause__, openai.error.AuthenticationError):
             return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
         if isinstance(e.__cause__, openai.error.APIError):

@@ -15,7 +15,8 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 import os
 import sys
@@ -224,8 +225,7 @@ def setIndex(token):
                 return jsonify({'error_message': str(e)}), 500
         return 'Index has been created', 200
    
-import logging
-logging.basicConfig(level=logging.DEBUG)
+
 @app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token): 

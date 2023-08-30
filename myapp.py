@@ -249,10 +249,7 @@ def get_project_details(token):
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     query_text = request.json.get("text", None)
     prompt = project['prompt']
-    template = (
-        prompt
-    )
-    qa_template = Prompt(template)
+
     # load index
     try:
         app.logger.debug("About to load index from storage...")
@@ -262,7 +259,11 @@ def get_project_details(token):
         # ... Your other code ...
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)  # Log the full exception traceback
-    if(project['response_mode'] == 'compact'):
+    if(project['response_mode'] != 'tree_summarize'):
+        template = (
+            prompt
+        )
+        qa_template = Prompt(template)
         query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode='compact')
     else:
         query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'], similarity_top_k=5)  

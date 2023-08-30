@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 # from langchain.chat_models import ChatOpenAI
 # from langchain import OpenAI
 from llama_index.logger import LlamaLogger
-from llama_index import load_index_from_storage, StorageContext
 
 from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
 from llama_index.llms import OpenAI
@@ -11,6 +10,7 @@ from llama_index import (
     VectorStoreIndex,
     SimpleDirectoryReader,
     load_index_from_storage,
+    ListIndex,
     StorageContext,
     Prompt,
     ServiceContext
@@ -39,19 +39,19 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-my_host = 'chatty.guru'
-host = "chatty.guru"
-user = "a0130638_darius"
-password = "09081993"
-database = "a0130638_chatty"
-storage = 'projects/'
-
-# my_host = '127.0.0.1:8000'
-# host = "localhost"
-# user = "root"
-# password = ""
-# database = "ai"
+# my_host = 'chatty.guru'
+# host = "chatty.guru"
+# user = "a0130638_darius"
+# password = "09081993"
+# database = "a0130638_chatty"
 # storage = 'projects/'
+
+my_host = '127.0.0.1:8000'
+host = "localhost"
+user = "root"
+password = ""
+database = "ai"
+storage = 'projects/'
 
 CORS(app, origins=['https://chatty.guru'])
 
@@ -208,9 +208,13 @@ def setIndex(token):
                 return jsonify({"error": f"Error removing file: {e}"}), 500
         documents = SimpleDirectoryReader(storageProject).load_data()
         try:
-            index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+            if(project['response_mode'] != 'tree_summarize'):
+                index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+                index.set_index_id("vector_index")
+            else:
+                index = ListIndex.from_documents(documents)
+                index.set_index_id("list_index")
             # save index to disk
-            index.set_index_id("vector_index")
             index.storage_context.persist(f'{storageProject}/data')
         except Exception as e:
             if isinstance(e.__cause__, openai.error.AuthenticationError):
@@ -253,7 +257,10 @@ def get_project_details(token):
     # load index
     try:
         app.logger.debug("About to load index from storage...")
-        index = load_index_from_storage(storage_context, index_id="vector_index")
+        if(project['response_mode'] != 'tree_summarize'):
+            index = load_index_from_storage(storage_context, index_id="vector_index")
+        else:
+            index = load_index_from_storage(storage_context, index_id="list_index")
         app.logger.debug("Successfully loaded index from storage.")
         
         # ... Your other code ...
@@ -266,12 +273,12 @@ def get_project_details(token):
         qa_template = Prompt(template)
         query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode='compact')
     else:
-        query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'], similarity_top_k=5)  
+        query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'])  
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
         app.logger.debug(f"About to make query_engine.query {query_text}")
-        response = query_engine.query(query_text)
+        response = query_engine.query(query_text + ". Пиши на русском языке")
         app.logger.debug("Successfully made query.")
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)

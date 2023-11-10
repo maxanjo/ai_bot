@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 # from langchain.chat_models import ChatOpenAI
 # from langchain import OpenAI
 from llama_index.logger import LlamaLogger
-
+from database_utils import get_project
 from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
 from llama_index.llms import OpenAI
 from llama_index import (
@@ -28,8 +28,21 @@ import mysql.connector
 from mysql.connector import Error
 import openai
 import shutil
+from celery import Celery
 
 app = Flask(__name__)
+
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend='redis://localhost:6379/0',
+        broker='redis://localhost:6379/0'
+    )
+
+    return celery
+
+celery = make_celery(app)
+
 
 gunicorn_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers = gunicorn_logger.handlers
@@ -39,20 +52,11 @@ app.debug = True  # Enable debug mode
 CORS(app)
 # Get the environment variable for the host
 
-my_host = 'chatty.guru'
-host = "chatty.guru"
-user = "a0130638_darius"
-password = "09081993"
-database = "a0130638_chatty"
-storage = 'projects/'
-
-# my_host = '127.0.0.1:8000'
-# host = "localhost"
-# user = "root"
-# password = ""
-# database = "ai"
-# storage = 'projects/'
-
+host=os.environ['HOST'],
+user=os.environ['SPRINTHOSTUSER'],
+password=os.environ['PASSWORD'],
+database=os.environ['DATABASE']
+storage='projects/'
 CORS(app, origins=['https://chatty.guru'])
 
 app.logger.debug("Flask app started")
@@ -83,27 +87,6 @@ def projectInfo(token):
         if (connection.is_connected()):
             cursor.close()
 
-# define the function to retrieve project details
-def get_project(token):
-    connection = mysql.connector.connect(
-        host=host,
-        user=user,
-        password=password,
-        database=database
-    )
-    try:
-        if connection.is_connected():
-            # join 'projects' and 'ai_settings' tables using the 'project_id' column
-            query = "SELECT p.*, a.* FROM projects p LEFT JOIN ai_settings a ON p.id = a.project_id WHERE p.token = %s"
-            cursor = connection.cursor(dictionary=True)
-            cursor.execute(query, (token,))
-            project = cursor.fetchone()
-            return project
-    except mysql.connector.Error as error:
-        print("Error while retrieving project details: {}".format(error))
-    finally:
-        if (connection.is_connected()):
-            cursor.close()
 
 @app.route("/", methods=["GET"])
 def sayHello():
@@ -185,49 +168,9 @@ def check_file_existence(id, filename):
 
 @app.route("/index/<token>", methods=["GET"])
 def setIndex(token):
-    referer = request.headers.get('Referer')
-    domain = referer.split('/')[2] if referer else None
-    # if domain != my_host:
-    #     return jsonify({'error_message': f'Forbidden'}), 403
-    project = get_project(token)
-    storageProject = f'{storage}{project["id"]}'
-    os.environ["OPENAI_API_KEY"] = project['open_ai_api_key']
-    openai.api_key = os.environ["OPENAI_API_KEY"]
-    llama_logger = LlamaLogger()
-    service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
-    if not os.path.exists(storageProject):
-        return 'Folder does not exist', 422
-    if len(os.listdir(storageProject)) == 0:
-        return 'Folder is empty. Add some files', 422
-    else:
-        data_file = os.path.join(storageProject, 'data')
-        if os.path.exists(data_file):
-            try:
-                shutil.rmtree(data_file)
-            except OSError as e:
-                return jsonify({"error": f"Error removing file: {e}"}), 500
-        documents = SimpleDirectoryReader(storageProject).load_data()
-        try:
-            if(project['response_mode'] != 'tree_summarize'):
-                index = VectorStoreIndex.from_documents(documents, service_context=service_context)
-                index.set_index_id("vector_index")
-            else:
-                index = ListIndex.from_documents(documents)
-                index.set_index_id("list_index")
-            # save index to disk
-            index.storage_context.persist(f'{storageProject}/data')
-        except Exception as e:
-            if isinstance(e.__cause__, openai.error.AuthenticationError):
-                return jsonify({'error_message': "Authentication Error: " + str(e.__cause__)}), 500
-            if isinstance(e.__cause__, openai.error.APIError):
-                return jsonify({'error_message': "OpenAI API returned an API Error: " + str(e.__cause__)}), 500
-            if isinstance(e.__cause__, openai.error.APIConnectionError ):
-                return jsonify({'error_message': "Failed to connect to OpenAI API: " + str(e.__cause__)}), 500
-            if isinstance(e.__cause__, openai.error.RateLimitError ):
-                return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
-            else:
-                return jsonify({'error_message': str(e)}), 500
-        return 'Index has been created', 200
+    from tasks import set_vector_index_task
+    task = set_vector_index_task.apply_async(args=[token])
+    return jsonify({'message': 'Task started', 'task_id': task.id}), 202
    
 
 @app.route("/projects/<token>", methods=["POST"])

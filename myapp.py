@@ -177,9 +177,10 @@ def setIndex(token):
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token): 
     project = get_project(token)  
+    print(project['open_ai_api_key'])
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
-    openai.api_key = os.environ["OPENAI_API_KEY"]
-    storageProject = f'{storage}{project["id"]}/data'
+    openai.api_key = project['open_ai_api_key']
+    storageProject = f'{storage}{project["project_id"]}/data'
     if not project:
         return jsonify({'error': 'Project not found'}), 404    
     # convert description from bytes to string

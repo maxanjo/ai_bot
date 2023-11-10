@@ -48,7 +48,7 @@ def send_error_payload(task_id, message):
 #Set index with custom folder
 def process_set_vector_index(token, task_id):
     project = get_project(token)
-    storageProject = f'{storage}{project["id"]}/custom'
+    storageProject = f'{storage}{project["project_id"]}'
     openai.api_key = project['open_ai_api_key']
     llama_logger = LlamaLogger()
     service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
@@ -58,12 +58,14 @@ def process_set_vector_index(token, task_id):
         try:
             shutil.rmtree(data_file)
         except OSError as e:
-            return send_error_payload(task_id, f"Error removing file: {e}")
+            print(e)
+            # return send_error_payload(task_id, f"Error removing file: {e}")
 
     try:
         documents = SimpleDirectoryReader(storageProject).load_data()
     except Exception as e:
-        return send_error_payload(task_id, f"Error loading documents: {e}")
+        print(e)
+        # return send_error_payload(task_id, f"Error loading documents: {e}")
     try:
         if project['response_mode'] != 'tree_summarize':
             index = VectorStoreIndex.from_documents(documents, service_context=service_context)
@@ -74,17 +76,17 @@ def process_set_vector_index(token, task_id):
         
         # save index to disk
         index.storage_context.persist(os.path.join(storageProject, 'data'))
-        headers = {
-            "Content-Type": "application/json",
-        }
-        # Notify Laravel of success
-        payload = {
-            "task_id": task_id,
-            "status": "COMPLETED",
-            "message": "Index has been created"
-        }
-        response = requests.post(laravel_route_url, json=payload, headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        # headers = {
+        #     "Content-Type": "application/json",
+        # }
+        # # Notify Laravel of success
+        # payload = {
+        #     "task_id": task_id,
+        #     "status": "COMPLETED",
+        #     "message": "Index has been created"
+        # }
+        # response = requests.post(laravel_route_url, json=payload, headers=headers)
+        # response.raise_for_status()  # Raise an exception for HTTP errors
 
     except Exception as e: 
         return handle_openai_exception(task_id, e)
@@ -101,5 +103,5 @@ def handle_openai_exception(task_id, e):
         message = "OpenAI API request exceeded rate limit: " + str(e.__cause__)
     else:
         message = "Unhandled OpenAI Error: " + str(e)
-
-    return send_error_payload(task_id, message)
+    print(message)
+    # return send_error_payload(task_id, message)

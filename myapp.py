@@ -176,13 +176,22 @@ def setIndex(token):
 @app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token): 
-    project = get_project(token)  
-    print(project['open_ai_api_key'])
+    project = get_project(token)
+    allowed_website = project.get('website')
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
     openai.api_key = project['open_ai_api_key']
     storageProject = f'{storage}{project["project_id"]}/data'
     if not project:
-        return jsonify({'error': 'Project not found'}), 404    
+        return jsonify({'error': 'Project not found'}), 404
+    allowed_website = project.get('website')  # replace 'website' with the actual key used in your project data
+    laravel_api_referer = os.environ.get('LARAVEL_API')
+
+    # Check if the request comes from an allowed website or the specified Laravel API Referer
+    if 'Referer' not in request.headers or (
+        allowed_website not in request.headers['Referer'] and
+        laravel_api_referer not in request.headers['Referer']
+    ):
+        return jsonify({'error': 'Access restricted'}), 403
     # convert description from bytes to string
     if project['description']:
         project['description'] = project['description'].decode()

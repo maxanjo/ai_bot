@@ -12,8 +12,14 @@ def get_project(token):
     )
     try:
         if connection.is_connected():
-            # join 'projects' and 'ai_settings' tables using the 'project_id' column
-            query = "SELECT p.*, a.* FROM projects p LEFT JOIN ai_settings a ON p.id = a.project_id WHERE p.token = %s"
+            # join 'projects', 'ai_settings', and 'users' tables using the 'project_id' and 'user_id' columns
+            query = """
+                SELECT p.*, a.*, u.*
+                FROM projects p
+                LEFT JOIN ai_settings a ON p.id = a.project_id
+                LEFT JOIN users u ON p.user_id = u.id
+                WHERE p.token = %s
+            """
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, (token,))
             project = cursor.fetchone()
@@ -21,6 +27,7 @@ def get_project(token):
     except mysql.connector.Error as error:
         print("Error while retrieving project details: {}".format(error))
     finally:
-        if (connection.is_connected()):
+        if connection.is_connected():
             cursor.close()
             connection.close()
+

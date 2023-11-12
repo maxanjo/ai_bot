@@ -175,7 +175,7 @@ def setIndex(token):
 
 @app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
-def get_project_details(token): 
+def get_project_details(token):
     project = get_project(token)
     allowed_website = project.get('website')
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
@@ -192,6 +192,12 @@ def get_project_details(token):
         laravel_api_referer not in request.headers['Referer']
     ):
         return jsonify({'error': 'Access restricted'}), 403
+
+    left_tokens = project.get('left_tokens', 0)
+
+    # Check if there are enough tokens
+    if left_tokens < 10000:
+        return jsonify({'error': 'Not enough tokens'}), 403  # You can use 403 or another appropriate HTTP status code
     # convert description from bytes to string
     if project['description']:
         project['description'] = project['description'].decode()

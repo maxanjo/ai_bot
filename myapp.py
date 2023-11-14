@@ -1,10 +1,7 @@
 from flask import Flask, request, jsonify
-# from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext, SimpleDirectoryReader,  QuestionAnswerPrompt
-# from langchain.chat_models import ChatOpenAI
-# from langchain import OpenAI
 from llama_index.logger import LlamaLogger
 from database_utils import get_project
-from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType, TokenCountingHandler
 from llama_index.llms import OpenAI
 from llama_index import (
     VectorStoreIndex,
@@ -172,7 +169,7 @@ def setIndex(token):
     task = set_vector_index_task.apply_async(args=[token])
     return jsonify({'message': 'Task started', 'task_id': task.id}), 202
    
-
+import tiktoken
 @app.route("/projects/<token>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token):
@@ -199,6 +196,10 @@ def get_project_details(token):
     if left_tokens < 10000:
         return jsonify({'error': 'Not enough tokens'}), 403  # You can use 403 or another appropriate HTTP status code
     # convert description from bytes to string
+
+    token_counter = TokenCountingHandler(
+        tokenizer=tiktoken.encoding_for_model("gpt-3.5-turbo").encode
+    )
     if project['description']:
         project['description'] = project['description'].decode()
     
@@ -208,7 +209,7 @@ def get_project_details(token):
     temperature = float(project['temperature'])
     llm = OpenAI(model=project['model'], temperature=temperature)
     llama_debug = LlamaDebugHandler(print_trace_on_end=True)
-    callback_manager = CallbackManager([llama_debug])
+    callback_manager = CallbackManager([llama_debug, token_counter])
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     query_text = request.json.get("text", None)
     prompt = project['prompt']
@@ -236,7 +237,7 @@ def get_project_details(token):
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
-        app.logger.debug(f"About to make query_engine.query {query_text}")
+        
         response = query_engine.query(query_text + ". Пиши на русском языке")
         app.logger.debug("Successfully made query.")
     except Exception as e:
@@ -256,6 +257,10 @@ def get_project_details(token):
     content = logs.payload
     result = {'result': response.response, 'logs': str(event_pairs)}
     llama_debug.flush_event_logs()
+    from tasks import send_chat_request
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], 'test', token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
+    
+        
     return jsonify(result), 200
 
 

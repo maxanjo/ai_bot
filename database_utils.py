@@ -3,6 +3,10 @@ from mysql.connector import Error
 import os
 import sys
 
+import requests
+
+
+
 def get_project(token):
     connection = mysql.connector.connect(
         host=os.environ['HOST'],

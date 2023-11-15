@@ -170,9 +170,9 @@ def setIndex(token):
     return jsonify({'message': 'Task started', 'task_id': task.id}), 202
    
 import tiktoken
-@app.route("/projects/<token>", methods=["POST"])
+@app.route("/projects/<token>/<session_id>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
-def get_project_details(token):
+def get_project_details(token, session_id):
     project = get_project(token)
     allowed_website = project.get('website')
     os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
@@ -258,7 +258,7 @@ def get_project_details(token):
     result = {'result': response.response, 'logs': str(event_pairs)}
     llama_debug.flush_event_logs()
     from tasks import send_chat_request
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], 'test', token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
     
         
     return jsonify(result), 200

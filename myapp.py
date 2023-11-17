@@ -12,6 +12,7 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
+
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -175,8 +176,7 @@ import tiktoken
 def get_project_details(token, session_id):
     project = get_project(token)
     allowed_website = project.get('website')
-    os.environ['OPENAI_API_KEY'] = project['open_ai_api_key']
-    openai.api_key = project['open_ai_api_key']
+    openai.api_key = "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"
     storageProject = f'{storage}{project["project_id"]}/data'
     if not project:
         return jsonify({'error': 'Project not found'}), 404
@@ -264,6 +264,20 @@ def get_project_details(token, session_id):
     return jsonify(result), 200
 
 
+def transliterate_and_secure_filename(filename):
+
+    # Separate name and extension
+    if '.' in filename:
+        name, ext = filename.rsplit('.', 1)
+    else:
+        return secure_filename(filename)
+    
+    # Transliterate non-ASCII characters and secure the filename
+    transliterated_name = unidecode(name)
+    secured_filename = secure_filename(f"{transliterated_name}.{ext}")
+    
+    return secured_filename
+    
 if __name__ == '__main__':
     app.run()
 

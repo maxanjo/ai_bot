@@ -49,7 +49,7 @@ def send_error_payload(task_id, message):
 def process_set_vector_index(token, task_id):
     project = get_project(token)
     storageProject = f'{storage}{project["project_id"]}'
-    openai.api_key = "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"
+    openai.api_key = os.environ['OPENAI_API_KEY']
     llama_logger = LlamaLogger()
     service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
 

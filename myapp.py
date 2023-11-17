@@ -176,7 +176,7 @@ import tiktoken
 def get_project_details(token, session_id):
     project = get_project(token)
     allowed_website = project.get('website')
-    openai.api_key = "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"
+    openai.api_key = os.environ['OPENAI_API_KEY']
     storageProject = f'{storage}{project["project_id"]}/data'
     if not project:
         return jsonify({'error': 'Project not found'}), 404

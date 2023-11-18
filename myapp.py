@@ -12,7 +12,8 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
-
+import time
+import hashlib
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -27,6 +28,7 @@ from mysql.connector import Error
 import openai
 import shutil
 from celery import Celery
+from unidecode import unidecode
 
 app = Flask(__name__)
 
@@ -147,8 +149,17 @@ def store_documents(id):
         if file:
             if not allowed_file(file.filename):
                 return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
-            # Securely generate a filename and save the file to the project folder
-            filename = secure_filename(file.filename)
+            
+            original_filename = transliterate_and_secure_filename(file.filename)
+            
+            if '.' not in original_filename: # Check if there is an extension in the filename
+                return jsonify({"error": f"Invalid file name. The file must have an extension."}), 400
+            
+            file_extension = original_filename.rsplit('.', 1)[1].lower()
+            
+            # Create a unique filename using random_string_part or timestamp
+            unique_string = hashlib.sha256((str(time.time()) + original_filename).encode()).hexdigest()[:10]
+            filename = f"{unique_string}_{original_filename}"
             file.save(os.path.join(project_folder, filename))
             saved_files.append({'name': filename, 'pr_id': id})
 

@@ -29,6 +29,10 @@ import openai
 import shutil
 from celery import Celery
 from unidecode import unidecode
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 

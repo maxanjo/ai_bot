@@ -95,8 +95,10 @@ def projectInfo(token):
 @app.route("/", methods=["GET"])
 def sayHello():
     return 'hello привет', 200
-@app.route("/files/<project_id>", methods=["GET"])
-def list_files(project_id):
+@app.route("/files/<token>", methods=["GET"])
+def list_files(token):
+    project = get_project(token)
+    project_id = project['project_id']
     project_folder = f'{storage}{project_id}'
     files = []
     # Check if the project folder exists
@@ -105,8 +107,10 @@ def list_files(project_id):
 
     return jsonify({"files": files, 'id': project_id}), 200
 
-@app.route("/remove/<project_id>/<filename>", methods=["DELETE"])
-def remove_file(project_id, filename):
+@app.route("/remove/<token>/<filename>", methods=["DELETE"])
+def remove_file(token, filename):
+    project = get_project(token)
+    project_id = project['project_id']
     project_folder = f'{storage}{project_id}'
 
     # Check if the project folder exists
@@ -132,10 +136,12 @@ def allowed_file(filename):
     # Check if the file has an extension and if the extension is in the allowed set
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/store/<id>", methods=["POST"])
-def store_documents(id):
+@app.route("/store/<token>", methods=["POST"])
+def store_documents(token):
+    project = get_project(token)
+    project_id = project['project_id']
     # Check if the project folder exists, if not, create it
-    project_folder = f'{storage}{id}'
+    project_folder = f'{storage}{project_id}'
     if not os.path.exists(project_folder):
         os.makedirs(project_folder)
 
@@ -165,7 +171,7 @@ def store_documents(id):
             unique_string = hashlib.sha256((str(time.time()) + original_filename).encode()).hexdigest()[:10]
             filename = f"{unique_string}_{original_filename}"
             file.save(os.path.join(project_folder, filename))
-            saved_files.append({'name': filename, 'pr_id': id})
+            saved_files.append({'name': filename, 'pr_id': project_id})
 
     return jsonify({"response": "Files uploaded successfully", "files": saved_files}), 200
 

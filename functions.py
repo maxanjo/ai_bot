@@ -14,6 +14,8 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
+from myapp import celery
+from celery.exceptions import SoftTimeLimitExceeded
 from llama_index.logger import LlamaLogger
 
 import openai
@@ -45,51 +47,56 @@ def send_error_payload(task_id, message):
         # Handle your custom exception here
         print(f"Handled Error: {e}")
 
+@celery.task(bind=True, soft_time_limit=600, hard_time_limit=650)
 #Set index with custom folder
-def process_set_vector_index(token, task_id):
-    project = get_project(token)
-    storageProject = f'{storage}{project["project_id"]}'
-    openai.api_key = os.environ['OPENAI_API_KEY']
-    llama_logger = LlamaLogger()
-    service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
+def process_set_vector_index(self, token, task_id):
+    try:
+        project = get_project(token)
+        storageProject = f'{storage}{project["project_id"]}'
+        openai.api_key = os.environ['OPENAI_API_KEY']
+        llama_logger = LlamaLogger()
+        service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
 
-    data_file = os.path.join(storageProject, 'data')
-    if os.path.exists(data_file):
+        data_file = os.path.join(storageProject, 'data')
+        if os.path.exists(data_file):
+            try:
+                shutil.rmtree(data_file)
+            except OSError as e:
+                print(e)
+                return send_error_payload(task_id, f"Error removing file: {e}")
+
         try:
-            shutil.rmtree(data_file)
-        except OSError as e:
+            documents = SimpleDirectoryReader(storageProject).load_data()
+        except Exception as e:
             print(e)
-            return send_error_payload(task_id, f"Error removing file: {e}")
+            return send_error_payload(task_id, f"Error loading documents: {e}")
+        try:
+            if project['response_mode'] != 'tree_summarize':
+                index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+                index.set_index_id("vector_index")
+            else:
+                index = ListIndex.from_documents(documents)
+                index.set_index_id("list_index")
+            
+            # save index to disk
+            index.storage_context.persist(os.path.join(storageProject, 'data'))
+            headers = {
+                "Content-Type": "application/json",
+            }
+            # Notify Laravel of success
+            payload = {
+                "task_id": task_id,
+                "status": "COMPLETED",
+                "message": "Index has been created"
+            }
+            response = requests.post(laravel_route_url, json=payload, headers=headers)
+            response.raise_for_status()  # Raise an exception for HTTP errors
 
-    try:
-        documents = SimpleDirectoryReader(storageProject).load_data()
-    except Exception as e:
-        print(e)
-        return send_error_payload(task_id, f"Error loading documents: {e}")
-    try:
-        if project['response_mode'] != 'tree_summarize':
-            index = VectorStoreIndex.from_documents(documents, service_context=service_context)
-            index.set_index_id("vector_index")
-        else:
-            index = ListIndex.from_documents(documents)
-            index.set_index_id("list_index")
-        
-        # save index to disk
-        index.storage_context.persist(os.path.join(storageProject, 'data'))
-        headers = {
-            "Content-Type": "application/json",
-        }
-        # Notify Laravel of success
-        payload = {
-            "task_id": task_id,
-            "status": "COMPLETED",
-            "message": "Index has been created"
-        }
-        response = requests.post(laravel_route_url, json=payload, headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-
-    except Exception as e: 
-        return handle_openai_exception(task_id, e)
+        except Exception as e: 
+            return handle_openai_exception(task_id, e)
+    except SoftTimeLimitExceeded:
+        send_error_payload(task_id, "Task took too long and was interrupted")
+        raise SoftTimeLimitExceeded("Task took too long and was interrupted.")
 
 # Define a custom function to handle OpenAI exceptions
 def handle_openai_exception(task_id, e):

@@ -12,6 +12,7 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
+from llama_index.memory import ChatMemoryBuffer
 import time
 import hashlib
 import logging
@@ -212,7 +213,7 @@ def get_project_details(token, session_id):
         return jsonify({'error': 'Access restricted'}), 403
 
     left_tokens = project.get('left_tokens', 0)
-
+    memory = ChatMemoryBuffer.from_defaults(token_limit=1500)
     # Check if there are enough tokens
     if left_tokens < 10000:
         return jsonify({'error': 'Not enough tokens'}), 403  # You can use 403 or another appropriate HTTP status code
@@ -248,18 +249,18 @@ def get_project_details(token, session_id):
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)  # Log the full exception traceback
     if(project['response_mode'] != 'tree_summarize'):
-        template = (
-            prompt
+        chat_engine = index.as_chat_engine(
+            chat_mode="context",
+            memory=memory,
+            system_prompt=prompt,
+            service_context=service_context, response_mode=project['response_mode']
         )
-        qa_template = Prompt(template)
-        query_engine = index.as_query_engine(text_qa_template=qa_template, service_context=service_context, response_mode='compact')
     else:
         query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'])  
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
-        
-        response = query_engine.query(query_text + ". Пиши на русском языке")
+        response = chat_engine.chat(query_text)
         app.logger.debug("Successfully made query.")
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)

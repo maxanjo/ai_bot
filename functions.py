@@ -64,6 +64,13 @@ def process_set_vector_index(self, token, task_id):
     try:
         project = get_project(token)
         storageProject = f'{storage}{project["project_id"]}'
+        folder_size = calculate_folder_size(storageProject)
+        if(project['subscription_plan'] == 'free' and folder_size > 2):
+            send_error_payload(task_id, "Files must be less than 2 mb")
+            return
+        if(folder_size > 50):
+            send_error_payload(task_id, "Files must be less than 50 mb")
+            return
         openai.api_key = os.environ['OPENAI_API_KEY']
         llama_logger = LlamaLogger()
         set_global_service_context(
@@ -132,3 +139,16 @@ def handle_openai_exception(task_id, e):
     else:
         message = "Unhandled OpenAI Error: " + str(e)
     return send_error_payload(task_id, message)
+
+def calculate_folder_size(folder_path):
+    total_size = 0
+
+    for dirpath, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+            total_size += os.path.getsize(filepath)
+
+    # Convert bytes to megabytes
+    total_size_mb = total_size / (1024 * 1024)
+
+    return total_size_mb

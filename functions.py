@@ -63,10 +63,13 @@ def process_set_vector_index(self, token, task_id):
     embed_model = MockEmbedding(embed_dim=1536)
     try:
         project = get_project(token)
+        if(project['left_tokens'] < 10000):
+            send_error_payload(task_id, "Недостаточно токенов")
+            return
         storageProject = f'{storage}{project["project_id"]}'
         folder_size = calculate_folder_size(storageProject)
         if(project['subscription_plan'] == 'free' and folder_size > 2):
-            send_error_payload(task_id, "Files must be less than 2 mb")
+            send_error_payload(task_id, "Файлы должны быть меньше 2 мегабайт. Перейдите на платный тариф, чтобы загружать больше")
             return
         if(folder_size > 50):
             send_error_payload(task_id, "Files must be less than 50 mb")

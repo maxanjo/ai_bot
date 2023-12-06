@@ -26,3 +26,20 @@ def send_chat_request(user_id, project_id, session, total_tokens, answer):
 
     except requests.exceptions.RequestException as e:
         print(f"Error sending data to API: {e}")
+
+@celery.task()
+def sendEmbeddingRequest(user_id, total_tokens):
+    chatData = {
+        "user_id": user_id,
+        "total_tokens": total_tokens
+    }
+    
+    try:
+        response = response = requests.post(
+            f'{os.environ.get("LARAVEL_API")}/api/chat/embedding',
+            json=chatData
+        )
+        response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending data to API: {e}")

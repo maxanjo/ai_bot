@@ -3,21 +3,23 @@ import os
 import re
 import sys
 import requests
-from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
-from llama_index.llms import OpenAI
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler,TokenCountingHandler, CBEventType
+from llama_index.llms import OpenAI, MockLLM
 from llama_index import (
     VectorStoreIndex,
     SimpleDirectoryReader,
     load_index_from_storage,
     ListIndex,
     StorageContext,
+    set_global_service_context,
     Prompt,
+    MockEmbedding,
     ServiceContext
 )
+import tiktoken
 from myapp import celery
 from celery.exceptions import SoftTimeLimitExceeded
 from llama_index.logger import LlamaLogger
-
 import openai
 import shutil
 from dotenv import load_dotenv
@@ -47,16 +49,26 @@ def send_error_payload(task_id, message):
         # Handle your custom exception here
         print(f"Handled Error: {e}")
 
+
 @celery.task(bind=True, soft_time_limit=600, hard_time_limit=650)
 #Set index with custom folder
 def process_set_vector_index(self, token, task_id):
+    
+    token_counter = TokenCountingHandler(
+        tokenizer=tiktoken.encoding_for_model("gpt-3.5-turbo").encode
+    )
+
+    callback_manager = CallbackManager([token_counter])
+    llm = MockLLM(max_tokens=256)
+    embed_model = MockEmbedding(embed_dim=1536)
     try:
         project = get_project(token)
         storageProject = f'{storage}{project["project_id"]}'
         openai.api_key = os.environ['OPENAI_API_KEY']
         llama_logger = LlamaLogger()
-        service_context = ServiceContext.from_defaults(llama_logger=llama_logger)
-
+        set_global_service_context(
+            service_context = ServiceContext.from_defaults(llama_logger=llama_logger, llm=llm, embed_model=embed_model, callback_manager=callback_manager)
+        )
         data_file = os.path.join(storageProject, 'data')
         if os.path.exists(data_file):
             try:
@@ -72,7 +84,7 @@ def process_set_vector_index(self, token, task_id):
             return send_error_payload(task_id, f"Error loading documents: {e}")
         try:
             if project['response_mode'] != 'tree_summarize':
-                index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+                index = VectorStoreIndex.from_documents(documents)
                 index.set_index_id("vector_index")
             else:
                 index = ListIndex.from_documents(documents)
@@ -80,6 +92,13 @@ def process_set_vector_index(self, token, task_id):
             
             # save index to disk
             index.storage_context.persist(os.path.join(storageProject, 'data'))
+            spent_tokens = token_counter.total_embedding_token_count / 10
+            from tasks import sendEmbeddingRequest
+            sendEmbeddingRequest.apply_async(args=[project['user_id'], spent_tokens])
+    
+            # reset counts
+            token_counter.reset_counts()
+
             headers = {
                 "Content-Type": "application/json",
             }
@@ -93,6 +112,8 @@ def process_set_vector_index(self, token, task_id):
             response.raise_for_status()  # Raise an exception for HTTP errors
 
         except Exception as e: 
+            return handle_openai_exception(task_id, e)
+    except Exception as e: 
             return handle_openai_exception(task_id, e)
     except SoftTimeLimitExceeded:
         send_error_payload(task_id, "Task took too long and was interrupted")

@@ -7,6 +7,14 @@ import requests
 def set_vector_index_task(self, token):
     return process_set_vector_index(token, self.request.id)
 
+import requests
+import os
+
+headers = {
+        'Origin': 'https://api-guru.ru',
+        'Content-Type': 'application/json',
+    }
+
 @celery.task()
 def send_chat_request(user_id, project_id, session, total_tokens, answer):
     chatData = {
@@ -16,11 +24,14 @@ def send_chat_request(user_id, project_id, session, total_tokens, answer):
         "total_tokens": total_tokens,
         "answer": answer
     }
+
+    
     
     try:
-        response = response = requests.post(
+        response = requests.post(
             f'{os.environ.get("LARAVEL_API")}/api/chat/update',
-            json=chatData
+            json=chatData,
+            headers=headers  # Include the headers in the request
         )
         response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
 
@@ -37,7 +48,8 @@ def sendEmbeddingRequest(user_id, total_tokens):
     try:
         response = response = requests.post(
             f'{os.environ.get("LARAVEL_API")}/api/chat/embedding',
-            json=chatData
+            json=chatData,
+            headers=headers
         )
         response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
 

@@ -13,6 +13,8 @@ import os
 headers = {
         'Origin': 'https://api-guru.ru',
         'Content-Type': 'application/json',
+        'Authorization': f'Bearer {app.config.get('FLASK_API_TOKEN')}'
+        
     }
 
 @celery.task()

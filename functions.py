@@ -113,6 +113,7 @@ def process_set_vector_index(self, token, task_id):
 
             headers = {
                 "Content-Type": "application/json",
+                'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
             }
             # Notify Laravel of success
             payload = {

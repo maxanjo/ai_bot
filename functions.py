@@ -32,7 +32,9 @@ laravel_route_url = f"{os.environ['LARAVEL_API']}/api/update-status-endpoint"
 
 def send_error_payload(task_id, message):
     headers = {
-        "Content-Type": "application/json",
+        'Origin': 'https://api-guru.ru',
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
     }
     payload_error = {
         "task_id": task_id,
@@ -53,15 +55,15 @@ def send_error_payload(task_id, message):
 @celery.task(bind=True, soft_time_limit=600, hard_time_limit=650)
 #Set index with custom folder
 def process_set_vector_index(self, token, task_id):
-    
-    token_counter = TokenCountingHandler(
-        tokenizer=tiktoken.encoding_for_model("gpt-3.5-turbo").encode
-    )
-
-    callback_manager = CallbackManager([token_counter])
-    llm = MockLLM(max_tokens=256)
-    embed_model = MockEmbedding(embed_dim=1536)
     try:
+        token_counter = TokenCountingHandler(
+            tokenizer=tiktoken.encoding_for_model("gpt-3.5-turbo").encode
+        )
+
+        callback_manager = CallbackManager([token_counter])
+        llm = MockLLM(max_tokens=256)
+        embed_model = MockEmbedding(embed_dim=1536)
+    
         project = get_project(token)
         if(project['left_tokens'] < 10000):
             send_error_payload(task_id, "Недостаточно токенов")

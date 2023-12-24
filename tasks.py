@@ -13,7 +13,7 @@ import os
 headers = {
         'Origin': 'https://api-guru.ru',
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {app.config.get('FLASK_API_TOKEN')}'
+        'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
         
     }
 

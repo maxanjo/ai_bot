@@ -197,11 +197,11 @@ import tiktoken
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token, session_id):
     project = get_project(token)
+    if not project:
+        return jsonify({'error': 'Project not found'}), 404
     allowed_website = project.get('website')
     openai.api_key = os.environ['OPENAI_API_KEY']
     storageProject = f'{storage}{project["project_id"]}/data'
-    if not project:
-        return jsonify({'error': 'Project not found'}), 404
     allowed_website = project.get('website')  # replace 'website' with the actual key used in your project data
     laravel_api_referer = os.environ.get('LARAVEL_API')
 

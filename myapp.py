@@ -99,6 +99,8 @@ def sayHello():
 @app.route("/files/<token>", methods=["GET"])
 def list_files(token):
     project = get_project(token)
+    if not project:
+        return jsonify({'error': 'Project not found'}), 404
     project_id = project['project_id']
     project_folder = f'{storage}{project_id}'
     files = []
@@ -111,6 +113,8 @@ def list_files(token):
 @app.route("/remove/<token>/<filename>", methods=["DELETE"])
 def remove_file(token, filename):
     project = get_project(token)
+    if not project:
+        return jsonify({'error': 'Project not found'}), 404
     project_id = project['project_id']
     project_folder = f'{storage}{project_id}'
 

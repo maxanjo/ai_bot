@@ -140,6 +140,8 @@ def allowed_file(filename):
 @app.route("/store/<token>", methods=["POST"])
 def store_documents(token):
     project = get_project(token)
+    if not project:
+        return jsonify({'error': 'Project not found'}), 404
     project_id = project['project_id']
     # Check if the project folder exists, if not, create it
     project_folder = f'{storage}{project_id}'

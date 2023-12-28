@@ -17,7 +17,7 @@ from llama_index.memory import ChatMemoryBuffer
 import time
 import hashlib
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 import os
 import sys
@@ -143,10 +143,10 @@ def is_related_to_products(text):
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
-        "For example q=item_name&color=green&size=44. "
-        "List of available query parameters: color, size, weight, material, price. "
+        "For example product_name=item_name&color=green&size=44. "
+        "List of available query parameters: product_name, color, size, weight, material, price. "
         "Use only these query parameters for consructing. "
-        "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes'}] "
+        "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', question_type: 'comparing products' | 'product characteristic' }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Dont write anything else. Your answer will be used for a next query. "
         ""
@@ -178,7 +178,7 @@ def is_related_to_products(text):
                 try:
                     # Parse the JSON content
                     data = json.loads(content)
-                    print(data)
+                    app.logger.info(data)
                     # Iterate through the data array
                     for item in data:
                         if isinstance(item, str):
@@ -186,15 +186,29 @@ def is_related_to_products(text):
                             item = json.loads(item)
                         url_params = item.get("url_params")
                         is_related = item.get("is_related")
-                        
+                        app.logger.info(url_params)
                         if is_related == "yes" and url_params:
-                            print(url_params)
-                            
+                            from urllib.parse import parse_qs, urlencode
+                            param_dict = parse_qs(url_params) 
+                            encoded_dict = urlencode(param_dict, doseq=True) 
                             # Make API calls to each URL
-                            response = requests.get('https://658d2a387c48dce947389ca4.mockapi.io/api/items/1')
+                            old_http_proxy = os.environ.get('HTTP_PROXY')  
+                            old_https_proxy = os.environ.get('HTTPS_PROXY')
+
+                            # Disable proxy env vars
+                            os.environ['HTTP_PROXY'] = ''
+                            os.environ['HTTPS_PROXY'] = ''
+
+                            response = requests.get(f'http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}', proxies=None)
+
+                            # Restore old proxy settings
+                            os.environ['HTTP_PROXY'] = old_http_proxy
+                            os.environ['HTTPS_PROXY'] = old_https_proxy
                             if response.status_code == 200:
                                 api_data = response.text
+                                app.logger.info(f'api data ' + api_data)
                                 return api_data
+
                             else:
                                 return ''
                 
@@ -317,12 +331,10 @@ def get_project_details(token, session_id):
 
     # load index
     try:
-        app.logger.debug("About to load index from storage...")
         if(project['response_mode'] != 'tree_summarize'):
             index = load_index_from_storage(storage_context, index_id="vector_index")
         else:
             index = load_index_from_storage(storage_context, index_id="list_index")
-        app.logger.debug("Successfully loaded index from storage.")
         
         # ... Your other code ...
     except Exception as e:
@@ -340,7 +352,6 @@ def get_project_details(token, session_id):
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
         response = chat_engine.chat(query_text)
-        app.logger.debug("Successfully made query.")
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)
         if isinstance(e.__cause__, openai.error.AuthenticationError):

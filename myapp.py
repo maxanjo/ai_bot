@@ -12,6 +12,7 @@ from llama_index import (
     Prompt,
     ServiceContext
 )
+import json
 from llama_index.memory import ChatMemoryBuffer
 import time
 import hashlib
@@ -23,6 +24,7 @@ import sys
 from flask_cors import CORS
 from flask_cors import cross_origin
 from requests.exceptions import HTTPError
+import requests
 from werkzeug.utils import secure_filename
 import mysql.connector
 from mysql.connector import Error
@@ -137,6 +139,75 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
+def is_related_to_products(text):
+    user_message = (
+        "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
+        "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
+        "For example q=item_name&color=green&size=44. "
+        "List of available query parameters: color, size, weight, material, price. "
+        "Use only these query parameters for consructing. "
+        "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes'}] "
+        "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
+        "Be strict. Dont write anything else. Your answer will be used for a next query. "
+        ""
+        f"Client question: {text}"
+        "Your answer:"
+    )
+    url = "https://api.openai.com/v1/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}"
+    }
+    payload = {
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": user_message}],
+        "temperature": 0
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+
+    
+    if response.status_code == 200:
+        api_response = response.json()
+
+        if "choices" in api_response and api_response["choices"]:
+            choice = api_response["choices"][0]
+            
+            if "message" in choice and "content" in choice["message"]:
+                content = choice["message"]["content"]
+                try:
+                    # Parse the JSON content
+                    data = json.loads(content)
+                    print(data)
+                    # Iterate through the data array
+                    for item in data:
+                        if isinstance(item, str):
+                            # Convert the string to a dictionary
+                            item = json.loads(item)
+                        url_params = item.get("url_params")
+                        is_related = item.get("is_related")
+                        
+                        if is_related == "yes" and url_params:
+                            print(url_params)
+                            
+                            # Make API calls to each URL
+                            response = requests.get('https://658d2a387c48dce947389ca4.mockapi.io/api/items/1')
+                            if response.status_code == 200:
+                                api_data = response.text
+                                return api_data
+                            else:
+                                return ''
+                
+                except json.JSONDecodeError as e:
+                    return ''
+
+        return ''
+    else:
+        return ''
+
+    # Handle error, unexpected response, or missing "is_related" key
+    return False
+
 def allowed_file(filename):
     # Check if the file has an extension and if the extension is in the allowed set
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -202,6 +273,9 @@ import tiktoken
 @app.route("/projects/<token>/<session_id>", methods=["POST"])
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token, session_id):
+    query_text = request.json.get("text", None)
+    product_response = is_related_to_products(query_text)
+  
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
@@ -239,8 +313,7 @@ def get_project_details(token, session_id):
     llama_debug = LlamaDebugHandler(print_trace_on_end=True)
     callback_manager = CallbackManager([llama_debug, token_counter])
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
-    query_text = request.json.get("text", None)
-    prompt = project['prompt']
+    prompt = project['prompt'] + '. \n Information about product ' + product_response
 
     # load index
     try:

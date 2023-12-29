@@ -20,6 +20,11 @@ import logging
 logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 import os
+env = os.environ.get('ENVIRONMENT', 'development')
+# Check if not production
+if env != 'production':
+  logging.basicConfig(filename='app.log', level=logging.DEBUG)
+  
 import sys
 from flask_cors import CORS
 from flask_cors import cross_origin
@@ -143,8 +148,9 @@ def is_related_to_products(text):
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
-        "For example product_name=item_name&color=green&size=44. "
-        "List of available query parameters: product_name, color, size, weight, material, price. "
+        "Add sort_price parameter if required ."
+        "For example product_name=item_name&color=green&size=44&sort_price=desc|asc. "
+        "List of available query parameters: product_name, color, size, weight, material, price, sort_price "
         "Use only these query parameters for consructing. "
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', question_type: 'comparing products' | 'product characteristic' }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "

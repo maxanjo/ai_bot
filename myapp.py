@@ -144,15 +144,16 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
-def is_related_to_products(text):
+def is_related_to_products(text, data):
+    data = json.loads(data)
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
         "Add sort_price parameter if required ."
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
-        "List of available query parameters: product_name, color, size, weight, material, price, sort_price "
+        f"List of available query parameters: {data['attributes']} "
         "Use only these query parameters for consructing. "
-        "Add a category. List of available categories: smartphones, laptops. "
+        f"Add a category. List of available categories: {data['categories']}. "
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
@@ -295,11 +296,14 @@ import tiktoken
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
-    product_response = is_related_to_products(query_text)
-  
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
+    product_response = ''
+    if(project.get('api')):
+        product_response = is_related_to_products(query_text, project.get('product_data'))
+  
+    
     allowed_website = project.get('website')
     openai.api_key = os.environ['OPENAI_API_KEY']
     storageProject = f'{storage}{project["project_id"]}/data'

@@ -151,6 +151,7 @@ def is_related_to_products(text, data):
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
         "Add sort_price parameter if required ."
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
+        "product_name is a required parameter"
         f"List of available query parameters: {data['attributes']} "
         "Use only these query parameters for consructing. "
         f"Add a category. List of available categories: {data['categories']}. "

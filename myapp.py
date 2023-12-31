@@ -146,7 +146,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 def is_related_to_products(text, data):
     data = json.loads(data)
     user_message = (
-        "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
+        "You are AI assistant for a online shop. You should determine if a client is asking or information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
         "Add sort_price parameter if required ."
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
@@ -343,6 +343,7 @@ def get_project_details(token, session_id):
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     context = project.get('context') if project.get('context') is not None else ''
     context += product_response
+    chat_history = f"\n History of conversation with the client: {project.get('answer')}"
     prompt = project['prompt'] + '. \n Information about relative products ' + context
 
     # load index

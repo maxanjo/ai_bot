@@ -7,7 +7,7 @@ import requests
 
 
 
-def get_project(token):
+def get_project(token, session_id = None):
     connection = mysql.connector.connect(
         host=os.environ['HOST'],
         user=os.environ['SPRINTHOSTUSER'],
@@ -21,14 +21,16 @@ def get_project(token):
                 SELECT 
                     p.api, p.product_data, p.website, p.id, 
                     u.left_tokens, p.description, 
-                    ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
+                    ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id,
+                    c.answer
                 FROM projects p
                 LEFT JOIN ai_settings ai ON p.id = ai.project_id
                 LEFT JOIN users u ON p.user_id = u.id
+                LEFT JOIN chats c ON p.id = c.project_id AND c.session_id = %s
                 WHERE p.token = %s
             """
             cursor = connection.cursor(dictionary=True)
-            cursor.execute(query, (token,))
+            cursor.execute(query, (session_id, token))
             project = cursor.fetchone()
             return project
     except mysql.connector.Error as error:

@@ -143,24 +143,26 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
-def is_related_to_products(text, data):
+def is_related_to_products(text, data, history):
     data = json.loads(data)
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
         "Add sort_price parameter if required ."
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
-        "product_name is a required parameter"
-        f"List of available query parameters: {data['attributes']} "
+        f"List of available query parameters: product_name, {data['attributes']} "
+        "product_name is a required parameter. You should use it in every query."
         "Use only these query parameters for consructing. "
         f"Add a category. List of available categories: {data['categories']}. "
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
         ""
-        f"Client question: {text}"
+        f"History of your conversaion with the client: {history} ."
+        f"Client question: {text} ."
         "Your answer:"
     )
+
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
@@ -195,6 +197,8 @@ def is_related_to_products(text, data):
                         url_params = item.get("url_params")
                         is_related = item.get("is_related")
                         app.logger.info(url_params)
+                        app.logger.info('prompt')
+                        app.logger.info(user_message)
                         if is_related == "yes" and url_params:
                             from urllib.parse import parse_qs, urlencode
                             param_dict = parse_qs(url_params) 
@@ -296,12 +300,12 @@ import tiktoken
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
-    project = get_project(token)
+    project = get_project(token, session_id)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
     product_response = ''
     if(project.get('api')):
-        product_response = is_related_to_products(query_text, project.get('product_data'))
+        product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))
   
     
     allowed_website = project.get('website')

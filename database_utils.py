@@ -16,11 +16,14 @@ def get_project(token):
     )
     try:
         if connection.is_connected():
-            # join 'projects', 'ai_settings', and 'users' tables using the 'project_id' and 'user_id' columns
+            #p.api, p.product_data, p.website, p.id, u.left_tokens, p.description, ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
             query = """
-                SELECT p.*, a.*, u.*
+                SELECT 
+                    p.api, p.product_data, p.website, p.id, 
+                    u.left_tokens, p.description, 
+                    ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
                 FROM projects p
-                LEFT JOIN ai_settings a ON p.id = a.project_id
+                LEFT JOIN ai_settings ai ON p.id = ai.project_id
                 LEFT JOIN users u ON p.user_id = u.id
                 WHERE p.token = %s
             """

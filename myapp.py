@@ -17,10 +17,9 @@ from llama_index.memory import ChatMemoryBuffer
 import time
 import hashlib
 import logging
-logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 import os
-env = os.environ.get('ENVIRONMENT', 'development')
+env = os.environ.get('ENVIRONMENT', 'production')
 # Check if not production
 if env != 'production':
   logging.basicConfig(filename='app.log', level=logging.DEBUG)
@@ -307,8 +306,7 @@ def get_project_details(token, session_id):
     
     allowed_website = project.get('website')
     openai.api_key = os.environ['OPENAI_API_KEY']
-    storageProject = f'{storage}{project["project_id"]}/data'
-    allowed_website = project.get('website')  # replace 'website' with the actual key used in your project data
+    storageProject = f'{storage}{project["id"]}/data'
     laravel_api_referer = os.environ.get('LARAVEL_API')
 
     # Check if the request comes from an allowed website or the specified Laravel API Referer
@@ -381,6 +379,7 @@ def get_project_details(token, session_id):
     content = logs.payload
     result = {'result': response.response, 'logs': str(event_pairs)}
     llama_debug.flush_event_logs()
+    app.logger.info(project)
     from tasks import send_chat_request
     send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
     

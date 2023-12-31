@@ -1,5 +1,8 @@
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:45:57] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:46:00] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/uVUWLosKTmk2YOnSRcN0njLJ2aPBnvPZ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:10:00] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/7S83rKjRzjWZWq5hgb3LaAP18DHse79P HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+INFO:myapp:[{'is_related': 'no'}]
+INFO:myapp:None
 DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
 DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
 DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
@@ -10,192 +13,195 @@ DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple fr
 DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
 INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
 DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["hello i want your cheapest xiaomi"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
 DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=5a9065906a7a1a69bdb78c7bd14cf9ce response_code=200
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=16 request_id=930337dcde3b26713649566868d3b257 response_code=200
 DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0280809] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
+> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0301768] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
 DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product"}, {"role": "user", "content": "hello i want your cheapest xiaomi"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1274 request_id=d029230fada609ad3ba81eb263547e29 response_code=200
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=506 request_id=e6e6279d0077bf471eaaf22a63ac226d response_code=200
+INFO:myapp:{'id': 12, 'user_id': 12, 'name': 'Макс', 'company_name': None, 'website': 'asdf', 'description': None, 'index_id': 'hPCKiRuw8dKLRicw', 'token': 'e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625', 'open_ai_api_key': None, 'cohere_api_key': None, 'company_email': None, 'company_phone': None, 'created_at': datetime.datetime(2023, 12, 25, 13, 41, 57), 'updated_at': datetime.datetime(2023, 12, 31, 12, 5, 54), 'api': 1, 'product_data': '{"attributes": "color", "categories": "misc,smartphones"}', 'project_id': 4, 'status': 1, 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'model': 'gpt-3.5-turbo', 'response_mode': 'compact', 'top_k': None, 'temperature': Decimal('0.00'), 'max_tokens': 512, 'max_input_size': 1500, 'num_output': 256, 'max_chunk_overlap': 20, 'max_request_per_hour': None, 'common_max_request_per_day': None, 'email': 'maxanjo512@gmail.com', 'provider': None, 'role': 'user', 'email_verified_at': None, 'password': None, 'access_token': None, 'auth_token': None, 'remember_token': None, 'subscription_plan': 'free', 'spent_tokens': 0, 'left_tokens': 32912}
+DEBUG:root:This is a debug message
 DEBUG:celery.utils.functional:
 def send_chat_request(user_id, project_id, session, total_tokens, answer):
     return 1
 
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:46:03] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/uVUWLosKTmk2YOnSRcN0njLJ2aPBnvPZ HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:47:21] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:47:24] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/chTEmQGpDRIExMbTe3IqS34dJAl2LRsJ HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi&sort_price=asc', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi&sort_price=asc
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi&sort_price=asc HTTP/1.1" 200 1584
-INFO:myapp:api data [{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"]},"stock":null,"image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>"},{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["black"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["hello i want your cheapest xiaomi"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=24 request_id=3c1229667a770eef5fa2b9b59381d877 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0280809] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\"},{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\"}]"}, {"role": "user", "content": "hello i want your cheapest xiaomi"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2137 request_id=39364654b5b738493dd71730ef7d37df response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 16:47:30] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/chTEmQGpDRIExMbTe3IqS34dJAl2LRsJ HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:58:08] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:58:19] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/MixfkEWxbOS6F4ddnsAA9RJIdOsvNn3b HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'color=silver', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:color=silver
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?color=silver HTTP/1.1" 400 79
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have silver xiaomi?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=21 request_id=dc2760cb88c75c0b3ec2add1ed39e902 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0287876] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product"}, {"role": "user", "content": "do you have silver xiaomi?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1351 request_id=de3979443c7fbb12aa884fe7099be976 response_code=200
-ERROR:myapp:Exception on /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/MixfkEWxbOS6F4ddnsAA9RJIdOsvNn3b [POST]
-Traceback (most recent call last):
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 556, in _ensured
-    return fun(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\messaging.py", line 208, in _publish
-    return channel.basic_publish(
-           ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\virtual\base.py", line 614, in basic_publish
-    return self._put(routing_key, message, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\redis.py", line 1016, in _put
-    client.lpush(self._q_for_pri(queue, pri), dumps(message))
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\commands\core.py", line 2721, in lpush
-    return self.execute_command("LPUSH", name, *values)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1269, in execute_command
-    return conn.retry.call_with_retry(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
-    return do()
-           ^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1270, in <lambda>
-    lambda: self._send_command_parse_response(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1245, in _send_command_parse_response
-    conn.send_command(*args)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 855, in send_command
-    self.send_packed_command(
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 828, in send_packed_command
-    self.check_health()
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 820, in check_health
-    self.retry.call_with_retry(self._send_ping, self._ping_failed)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
-    return do()
-           ^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 810, in _send_ping
-    if str_if_bytes(self.read_response()) != "PONG":
-                    ^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 905, in read_response
-    raise response
-redis.exceptions.ResponseError: MISCONF Memurai is configured to save RDB snapshots, but it's currently unable to persist to disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Memurai logs for details about the RDB error.
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:10:05] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/7S83rKjRzjWZWq5hgb3LaAP18DHse79P HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
 
-During handling of the above exception, another exception occurred:
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
 
-Traceback (most recent call last):
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\virtual\base.py", line 951, in create_channel
-    return self._avail_channels.pop()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-IndexError: pop from empty list
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
 
-During handling of the above exception, another exception occurred:
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
 
-Traceback (most recent call last):
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 472, in _reraise_as_library_errors
-    yield
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 578, in _ensured
-    self._ensure_connection(
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 459, in _ensure_connection
-    return retry_over_time(
-           ^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\utils\functional.py", line 318, in retry_over_time
-    return fun(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 934, in _connection_factory
-    self._connection = self._establish_connection()
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 860, in _establish_connection
-    conn = self.transport.establish_connection()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\virtual\base.py", line 975, in establish_connection
-    self._avail_channels.append(self.create_channel(self))
-                                ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\virtual\base.py", line 953, in create_channel
-    channel = self.Channel(connection)
-              ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\transport\redis.py", line 741, in __init__
-    self.client.ping()
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\commands\core.py", line 1205, in ping
-    return self.execute_command("PING", **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1269, in execute_command
-    return conn.retry.call_with_retry(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
-    return do()
-           ^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1270, in <lambda>
-    lambda: self._send_command_parse_response(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\client.py", line 1245, in _send_command_parse_response
-    conn.send_command(*args)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 855, in send_command
-    self.send_packed_command(
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 828, in send_packed_command
-    self.check_health()
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 820, in check_health
-    self.retry.call_with_retry(self._send_ping, self._ping_failed)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
-    return do()
-           ^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 810, in _send_ping
-    if str_if_bytes(self.read_response()) != "PONG":
-                    ^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\redis\connection.py", line 905, in read_response
-    raise response
-redis.exceptions.ResponseError: MISCONF Memurai is configured to save RDB snapshots, but it's currently unable to persist to disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Memurai logs for details about the RDB error.
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
 
-The above exception was the direct cause of the following exception:
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
 
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:20:29] "[33mGET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:20:32] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/tOc3f155FbtFZbO8O0uryFGgOBCi72Pm HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:20:32] "[33mPOST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/tOc3f155FbtFZbO8O0uryFGgOBCi72Pm HTTP/1.1[0m" 404 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+ERROR:myapp:Exception on /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 [GET]
 Traceback (most recent call last):
   File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
     response = self.full_dispatch_request()
@@ -215,30 +221,48 @@ Traceback (most recent call last):
   File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\myapp.py", line 384, in get_project_details
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\celery\app\task.py", line 594, in apply_async
-    return app.send_task(
-           ^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\celery\app\base.py", line 798, in send_task
-    amqp.send_task_message(P, name, message, **options)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\celery\app\amqp.py", line 517, in send_task_message
-    ret = producer.publish(
-          ^^^^^^^^^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\messaging.py", line 186, in publish
-    return _publish(
-           ^^^^^^^^^
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 553, in _ensured
-    with self._reraise_as_library_errors():
-  File "C:\Users\Maxan\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 155, in __exit__
-    self.gen.throw(typ, value, traceback)
-  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\kombu\connection.py", line 476, in _reraise_as_library_errors
-    raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: MISCONF Memurai is configured to save RDB snapshots, but it's currently unable to persist to disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Memurai logs for details about the RDB error.
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:58:24] "[35m[1mPOST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/MixfkEWxbOS6F4ddnsAA9RJIdOsvNn3b HTTP/1.1[0m" 500 -
-DEBUG:myapp:Flask app started
+  File "C:\OSPanel\domains\ai_assistant\api\myapp.py", line 110, in list_files
+    project_id = project['project_id']
+                 ~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'project_id'
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:21:29] "[35m[1mGET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:21:33] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/Mq6snXqUA3pmXreVBi3SRFqMz8pxu0rj HTTP/1.1" 200 -
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+INFO:myapp:[{'is_related': 'no'}]
+INFO:myapp:None
+ERROR:myapp:Exception on /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/Mq6snXqUA3pmXreVBi3SRFqMz8pxu0rj [POST]
+Traceback (most recent call last):
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\myapp.py", line 309, in get_project_details
+    storageProject = f'{storage}{project["project_id"]}/data'
+                                 ~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'project_id'
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:21:34] "[35m[1mPOST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/Mq6snXqUA3pmXreVBi3SRFqMz8pxu0rj HTTP/1.1[0m" 500 -
+DEBUG:root:This is a debug message
 DEBUG:celery.utils.functional:
 def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
     return 1
 
 DEBUG:celery.utils.functional:
@@ -246,11 +270,11 @@ def process_set_vector_index(self, token, task_id):
     return 1
 
 DEBUG:celery.utils.functional:
-def send_chat_request(user_id, project_id, session, total_tokens, answer):
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
     return 1
 
 DEBUG:celery.utils.functional:
-def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+def send_chat_request(user_id, project_id, session, total_tokens, answer):
     return 1
 
 DEBUG:celery.utils.functional:
@@ -262,11 +286,11 @@ def backend_cleanup():
     return 1
 
 DEBUG:celery.utils.functional:
-def chain(*args, **kwargs):
+def sendEmbeddingRequest(user_id, total_tokens):
     return 1
 
 DEBUG:celery.utils.functional:
-def set_vector_index_task(self, token):
+def chain(*args, **kwargs):
     return 1
 
 DEBUG:celery.utils.functional:
@@ -278,10 +302,6 @@ def accumulate(self, *args, **kwargs):
     return 1
 
 DEBUG:celery.utils.functional:
-def sendEmbeddingRequest(user_id, total_tokens):
-    return 1
-
-DEBUG:celery.utils.functional:
 def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
     return 1
 
@@ -289,49 +309,15 @@ DEBUG:celery.utils.functional:
 def chunks(task, it, n):
     return 1
 
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:58:57] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:59:03] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/frFrBGjxlGiyyVXYSeEQbkhNYqbCbgFt HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'color=silver', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:color=silver
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?color=silver HTTP/1.1" 400 79
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have silver xiaomi?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=30 request_id=47a38a783627395c3f3c43786dd65767 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0288006] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product"}, {"role": "user", "content": "do you have silver xiaomi?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1409 request_id=dca534acd7093a712166a98d65197c7d response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 17:59:08] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/frFrBGjxlGiyyVXYSeEQbkhNYqbCbgFt HTTP/1.1" 200 -
 DEBUG:myapp:Flask app started
 INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:01:51] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:01:59] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/75fRTaZF8NNcE9TUUtf2759wr9bymyO9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:23:01] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/wck69kcLPjX9CFsDqNKufQIoXWuONpeD HTTP/1.1" 200 -
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi&color=silver', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi&color=silver
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi&color=silver HTTP/1.1" 200 1585
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["silver"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"]},"stock":null,"image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>"}]
+INFO:myapp:[{'is_related': 'no'}]
+INFO:myapp:None
 DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
 DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
 DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
@@ -342,196 +328,21 @@ DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple fr
 DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
 INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
 DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have silver xiaomi?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
 DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
 DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=44ddabdad0eb6b0ac366c7825c2c2e03 response_code=200
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=ac662b2bde48aa0aeb9233d2e5c5d357 response_code=200
 DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0287876] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
+> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0301768] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
 DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\"},{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\"}]"}, {"role": "user", "content": "do you have silver xiaomi?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1820 request_id=2b561fecf701e2896f7a5deebd03902b response_code=200
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=543 request_id=f82e8c8c3ba3441012f98b70e0bd6f5b response_code=200
+INFO:myapp:{'api': 1, 'product_data': '{"attributes": "color", "categories": "misc,smartphones"}', 'website': 'asdf', 'id': 4, 'left_tokens': 32345, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12}
+DEBUG:root:This is a debug message
 DEBUG:celery.utils.functional:
 def send_chat_request(user_id, project_id, session, total_tokens, answer):
     return 1
 
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:02:06] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/75fRTaZF8NNcE9TUUtf2759wr9bymyO9 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:25:59] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:26:07] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/gzVFVl2nlXfgg5KbJVXyNk1cVZaxuZND HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi&color=silver', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi&color=silver
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi&color=silver HTTP/1.1" 200 1195
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["silver"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have silver xiaomi? "], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=16 request_id=6fb7ae483008c4c94fe0d8bc3029c712 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0288105] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\"}]"}, {"role": "user", "content": "do you have silver xiaomi? "}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=1757 request_id=fb6134850ddd834f7b8088a1b4dff3c8 response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 18:26:12] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/gzVFVl2nlXfgg5KbJVXyNk1cVZaxuZND HTTP/1.1" 200 -
-DEBUG:myapp:Flask app started
-DEBUG:celery.utils.functional:
-def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
-    return 1
-
-DEBUG:celery.utils.functional:
-def process_set_vector_index(self, token, task_id):
-    return 1
-
-DEBUG:celery.utils.functional:
-def send_chat_request(user_id, project_id, session, total_tokens, answer):
-    return 1
-
-DEBUG:celery.utils.functional:
-def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
-    return 1
-
-DEBUG:celery.utils.functional:
-def xmap(task, it):
-    return 1
-
-DEBUG:celery.utils.functional:
-def backend_cleanup():
-    return 1
-
-DEBUG:celery.utils.functional:
-def chain(*args, **kwargs):
-    return 1
-
-DEBUG:celery.utils.functional:
-def set_vector_index_task(self, token):
-    return 1
-
-DEBUG:celery.utils.functional:
-def xstarmap(task, it):
-    return 1
-
-DEBUG:celery.utils.functional:
-def accumulate(self, *args, **kwargs):
-    return 1
-
-DEBUG:celery.utils.functional:
-def sendEmbeddingRequest(user_id, total_tokens):
-    return 1
-
-DEBUG:celery.utils.functional:
-def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
-    return 1
-
-DEBUG:celery.utils.functional:
-def chunks(task, it, n):
-    return 1
-
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:49:50] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:49:53] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/v1OfZv6ydzbh6bXry0NxAkDSLlTVVHU4 HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi&color=silver', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi&color=silver
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi&color=silver HTTP/1.1" 200 1298
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["silver"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have silver xiaomi?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=18b0f56af85629648885cea21741099c response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0287876] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\"}]"}, {"role": "user", "content": "do you have silver xiaomi?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=997 request_id=db886b42efc9b070f8079aeb6b56a137 response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:49:58] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/v1OfZv6ydzbh6bXry0NxAkDSLlTVVHU4 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:51:32] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:51:48] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/sqe8dFrzOs32SBqmChUkk5ErRt64hgfe HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi HTTP/1.1" 200 1752
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["silver"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"]},"stock":null,"image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have xiaomi? Is it good smarthone?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=17 request_id=fa2272993b5c26a5435be2beacff3d1b response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0275422] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\"},{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/xiaomi-12-black\\\\/\\"}]"}, {"role": "user", "content": "do you have xiaomi? Is it good smarthone?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2092 request_id=9fc3a25db938c83869a26585a367d301 response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:51:54] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/sqe8dFrzOs32SBqmChUkk5ErRt64hgfe HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:53:10] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:53:18] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/U8MdC5Cau71z6gfivYe3283y4apVdBRO HTTP/1.1" 200 -
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:[{'url_params': 'product_name=xiaomi 13', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:product_name=xiaomi 13
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=xiaomi+13 HTTP/1.1" 200 1298
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"<ul class=\"a-unordered-list a-vertical a-spacing-mini\">\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Leica main camera with professional optical lens Captures every great moment<\/span><\/li>\r\n \t<li class=\"a-spacing-mini\"><span class=\"a-list-item\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\/span><\/li>\r\n<\/ul>","date":"27.12.2023","attributes":{"pa_color":["silver"]},"stock":null,"image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["do you have xiaomi 13? Is it good smarthone?"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=645f18cfe0b68d5dacf6e43cb862617e response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0277462] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    . \\n Information about product [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"<ul class=\\\\\\"a-unordered-list a-vertical a-spacing-mini\\\\\\">\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Ultra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Built for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Leica main camera with professional optical lens Captures every great moment<\\\\/span><\\\\/li>\\\\r\\\\n \\\\t<li class=\\\\\\"a-spacing-mini\\\\\\"><span class=\\\\\\"a-list-item\\\\\\">Masterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption<\\\\/span><\\\\/li>\\\\r\\\\n<\\\\/ul>\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"]},\\"stock\\":null,\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\"}]"}, {"role": "user", "content": "do you have xiaomi 13? Is it good smarthone?"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2885 request_id=f76c42bc27c5f79ede2c068cea4b2a7f response_code=200
-INFO:werkzeug:127.0.0.1 - - [30/Dec/2023 19:53:23] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/U8MdC5Cau71z6gfivYe3283y4apVdBRO HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [31/Dec/2023 16:23:04] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/wck69kcLPjX9CFsDqNKufQIoXWuONpeD HTTP/1.1" 200 -

@@ -107,7 +107,7 @@ def list_files(token):
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
-    project_id = project['project_id']
+    project_id = project['id']
     project_folder = f'{storage}{project_id}'
     files = []
     # Check if the project folder exists
@@ -121,7 +121,7 @@ def remove_file(token, filename):
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
-    project_id = project['project_id']
+    project_id = project['id']
     project_folder = f'{storage}{project_id}'
 
     # Check if the project folder exists
@@ -143,7 +143,7 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
-def is_related_to_products(text, data, history):
+def is_related_to_products(text, data):
     data = json.loads(data)
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking information about a product in our store. " 
@@ -158,7 +158,6 @@ def is_related_to_products(text, data, history):
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
         ""
-        f"History of your conversaion with the client: {history} ."
         f"Client question: {text} ."
         "Your answer:"
     )
@@ -243,7 +242,7 @@ def store_documents(token):
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
-    project_id = project['project_id']
+    project_id = project['id']
     # Check if the project folder exists, if not, create it
     project_folder = f'{storage}{project_id}'
     if not os.path.exists(project_folder):
@@ -301,11 +300,12 @@ import tiktoken
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
     project = get_project(token, session_id)
+    app.logger.info(project)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
     product_response = ''
     if(project.get('api')):
-        product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))
+        product_response = is_related_to_products(query_text, project.get('product_data'))
   
     
     allowed_website = project.get('website')
@@ -341,7 +341,9 @@ def get_project_details(token, session_id):
     llama_debug = LlamaDebugHandler(print_trace_on_end=True)
     callback_manager = CallbackManager([llama_debug, token_counter])
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
-    prompt = project['prompt'] + '. \n Information about product ' + product_response
+    context = project.get('context') if project.get('context') is not None else ''
+    context += product_response
+    prompt = project['prompt'] + '. \n Information about relative products ' + context
 
     # load index
     try:
@@ -385,7 +387,7 @@ def get_project_details(token, session_id):
     llama_debug.flush_event_logs()
     app.logger.info(project)
     from tasks import send_chat_request
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}"])
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}", product_response])
     
         
     return jsonify(result), 200

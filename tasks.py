@@ -24,8 +24,9 @@ headers = {
         
     }
 
+
 @celery.task()
-def send_chat_request(user_id, project_id, session, total_tokens, answer):
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
     
 
     chatData = {
@@ -33,11 +34,10 @@ def send_chat_request(user_id, project_id, session, total_tokens, answer):
         "project_id": project_id,
         "session_id": session,
         "total_tokens": total_tokens,
-        "answer": answer
+        "answer": answer,
+        "context": context
     }
 
-    
-    print(chatData)
     try:
         # Make API calls to each URL
         old_http_proxy = os.environ.get('HTTP_PROXY')  

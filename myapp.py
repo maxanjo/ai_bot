@@ -143,8 +143,19 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
-def is_related_to_products(text, data):
-    data = json.loads(data)
+def is_related_to_products(text, api_url):
+    old_http_proxy = os.environ.get('HTTP_PROXY')  
+    old_https_proxy = os.environ.get('HTTPS_PROXY')
+    os.environ['HTTP_PROXY'] = ''
+    os.environ['HTTPS_PROXY'] = ''
+    response = requests.get(f'{api_url}/shop_meta')
+    if response.status_code == 200:
+        response = response.json()
+        data = json.loads(response)
+    os.environ['HTTP_PROXY'] = old_http_proxy
+    os.environ['HTTPS_PROXY'] = old_https_proxy
+    
+    
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking or information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
@@ -203,13 +214,6 @@ def is_related_to_products(text, data):
                             param_dict = parse_qs(url_params) 
                             encoded_dict = urlencode(param_dict, doseq=True) 
                             # Make API calls to each URL
-                            old_http_proxy = os.environ.get('HTTP_PROXY')  
-                            old_https_proxy = os.environ.get('HTTPS_PROXY')
-
-                            # Disable proxy env vars
-                            os.environ['HTTP_PROXY'] = ''
-                            os.environ['HTTPS_PROXY'] = ''
-
                             response = requests.get(f'http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}', proxies=None)
 
                             # Restore old proxy settings

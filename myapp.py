@@ -143,7 +143,7 @@ def remove_file(token, filename):
 
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
 
-def is_related_to_products(text, api_url):
+def is_related_to_products(text, api_url, history):
     old_http_proxy = os.environ.get('HTTP_PROXY')  
     old_https_proxy = os.environ.get('HTTPS_PROXY')
     os.environ['HTTP_PROXY'] = ''
@@ -172,7 +172,9 @@ def is_related_to_products(text, api_url):
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
-        ""
+        "========== "
+        "History of conversation with client: "
+        f"{history}"
         f"Client question: {text} ."
         "Your answer:"
     )
@@ -315,7 +317,7 @@ def get_project_details(token, session_id):
         return jsonify({'error': 'Project not found'}), 404
     product_response = ''
     if(project.get('api')):
-        product_response = is_related_to_products(query_text, project.get('product_data'))
+        product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))
   
     
     allowed_website = project.get('website')
@@ -353,9 +355,9 @@ def get_project_details(token, session_id):
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     context = project.get('context') if project.get('context') is not None else ''
     context += product_response
-    chat_history = f"\n History of conversation with the client: {project.get('answer')}"
-    prompt = project['prompt'] + chat_history + '. \n Information about relative products ' + context
-
+    chat_history = f"\n ============\n History of conversation with the client: {project.get('answer')}"
+    prompt = project['prompt'] + chat_history + '\n=========== \n Information about relative products ' + context
+    app.logger.info(f"Final prompt: {prompt}")
     # load index
     try:
         if(project['response_mode'] != 'tree_summarize'):

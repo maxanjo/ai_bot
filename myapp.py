@@ -152,6 +152,10 @@ def is_related_to_products(text, api_url):
     if response.status_code == 200:
         response = response.json()
         data = json.loads(response)
+    attributes = f"List of available query parameters: product_name, {data['attributes']}. " if 'attributes' in data else ''
+    categories = f"Add a category. List of available categories: {data['categories']}. " if 'categories' in data else ''
+    print(f"categories: {categories}")
+    print(f"attributes: {attributes}")
     os.environ['HTTP_PROXY'] = old_http_proxy
     os.environ['HTTPS_PROXY'] = old_https_proxy
     
@@ -161,10 +165,10 @@ def is_related_to_products(text, api_url):
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
         "Add sort_price parameter if required ."
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
-        f"List of available query parameters: product_name, {data['attributes']} "
+        f"{attributes}"
         "product_name is a required parameter. You should use it in every query."
         "Use only these query parameters for consructing. "
-        f"Add a category. List of available categories: {data['categories']}. "
+        f"{categories}"
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
@@ -213,6 +217,8 @@ def is_related_to_products(text, api_url):
                             from urllib.parse import parse_qs, urlencode
                             param_dict = parse_qs(url_params) 
                             encoded_dict = urlencode(param_dict, doseq=True) 
+                            os.environ['HTTP_PROXY'] = ''
+                            os.environ['HTTPS_PROXY'] = ''
                             # Make API calls to each URL
                             response = requests.get(f'http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}', proxies=None)
 
@@ -348,7 +354,7 @@ def get_project_details(token, session_id):
     context = project.get('context') if project.get('context') is not None else ''
     context += product_response
     chat_history = f"\n History of conversation with the client: {project.get('answer')}"
-    prompt = project['prompt'] + '. \n Information about relative products ' + context
+    prompt = project['prompt'] + chat_history + '. \n Information about relative products ' + context
 
     # load index
     try:

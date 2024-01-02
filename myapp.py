@@ -167,7 +167,7 @@ def is_related_to_products(text, api_url, history):
         "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
         f"{attributes}"
         "product_name is a required parameter. You should use it in every query."
-        "Use only these query parameters for consructing. "
+        "Use only these query parameters and and choose one value."
         f"{categories}"
         "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "

@@ -163,13 +163,12 @@ def is_related_to_products(text, api_url, history):
     user_message = (
         "You are AI assistant for a online shop. You should determine if a client is asking or information about a product in our store. " 
         "It can be a question about price, availability in stock, product characteristic, comparing 2 products. In this case you should contruct query parameters based on a client question. Construct them for every mentioned product. "
-        "Add sort_price parameter if required ."
-        "For example product_name=item_name&color=green&size=44&sort_price=desc|asc "
         f"{attributes}"
+        "Add price_order parameter if required ."
         "product_name is a required parameter. You should use it in every query."
         "Use only these query parameters and and choose one value."
         f"{categories}"
-        "Write your asnwer as array of json objects. [{url_params: <url_here>, is_related: 'yes', category: <category_here> }] "
+        'Write your asnwer as array of json objects. [{"url_params": "<url_here>", "is_related": "yes", "category": "<category_here>" }] '
         "If the question is not related to products of the store, then your answer would be [{is_related: 'no'}] "
         "Be strict. Fix typos in product names. Dont write anything else. Your answer will be used for a next query. "
         "========== "
@@ -195,16 +194,20 @@ def is_related_to_products(text, api_url, history):
     
     if response.status_code == 200:
         api_response = response.json()
-
+        app.logger.info(f"Api response Related Function: {api_response}")
         if "choices" in api_response and api_response["choices"]:
             choice = api_response["choices"][0]
             
             if "message" in choice and "content" in choice["message"]:
                 content = choice["message"]["content"]
+                corrected_content = content.replace("'", '"')
+                app.logger.info(f"Content exist {corrected_content}")
+
                 try:
                     # Parse the JSON content
-                    data = json.loads(content)
-                    app.logger.info(data)
+                    data = json.loads(corrected_content)
+                    app.logger.info(f"parsed json: {data}")
+                    
                     # Iterate through the data array
                     for item in data:
                         if isinstance(item, str):
@@ -212,15 +215,17 @@ def is_related_to_products(text, api_url, history):
                             item = json.loads(item)
                         url_params = item.get("url_params")
                         is_related = item.get("is_related")
-                        app.logger.info(url_params)
-                        app.logger.info('prompt')
-                        app.logger.info(user_message)
+                        app.logger.info(f"Url Params: {url_params}")
+
                         if is_related == "yes" and url_params:
                             from urllib.parse import parse_qs, urlencode
                             param_dict = parse_qs(url_params) 
                             encoded_dict = urlencode(param_dict, doseq=True) 
                             os.environ['HTTP_PROXY'] = ''
                             os.environ['HTTPS_PROXY'] = ''
+                            url = f"http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}"
+                            app.logger.info(f"Api request url: {url}")
+
                             # Make API calls to each URL
                             response = requests.get(f'http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}', proxies=None)
 
@@ -236,6 +241,8 @@ def is_related_to_products(text, api_url, history):
                                 return ''
                 
                 except json.JSONDecodeError as e:
+                    app.logger.info(f"json error: {e}")
+
                     return ''
 
         return ''

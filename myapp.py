@@ -154,8 +154,6 @@ def is_related_to_products(text, api_url, history):
         data = json.loads(response)
     attributes = f"List of available query parameters: product_name, {data['attributes']}. " if 'attributes' in data else ''
     categories = f"Add a category. List of available categories: {data['categories']}. " if 'categories' in data else ''
-    print(f"categories: {categories}")
-    print(f"attributes: {attributes}")
     os.environ['HTTP_PROXY'] = old_http_proxy
     os.environ['HTTPS_PROXY'] = old_https_proxy
     

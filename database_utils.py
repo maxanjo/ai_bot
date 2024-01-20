@@ -20,7 +20,7 @@ def get_project(token, session_id = None):
             query = """
                 SELECT 
                     p.api, p.product_data, p.website, p.id, 
-                    u.left_tokens, p.description, 
+                    u.left_tokens, p.description, u.subscription_plan,
                     ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id,
                     c.answer, c.context
                 FROM projects p

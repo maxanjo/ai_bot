@@ -68,7 +68,7 @@ def process_set_vector_index(self, token, task_id):
         if(project['left_tokens'] < 10000):
             send_error_payload(task_id, "Недостаточно токенов")
             return
-        storageProject = f'{storage}{project["project_id"]}'
+        storageProject = f'{storage}{project["id"]}'
         folder_size = calculate_folder_size(storageProject)
         if(project['subscription_plan'] == 'free' and folder_size > 2):
             send_error_payload(task_id, "Файлы должны быть меньше 2 мегабайт. Перейдите на платный тариф, чтобы загружать больше")
@@ -124,10 +124,9 @@ def process_set_vector_index(self, token, task_id):
             response = requests.post(laravel_route_url, json=payload, headers=headers)
             response.raise_for_status()  # Raise an exception for HTTP errors
 
-        except Exception as e: 
+        except Exception as e:
             return handle_openai_exception(task_id, e)
-    except Exception as e: 
-            return handle_openai_exception(task_id, e)
+    
     except SoftTimeLimitExceeded:
         send_error_payload(task_id, "Task took too long and was interrupted")
         raise SoftTimeLimitExceeded("Task took too long and was interrupted.")

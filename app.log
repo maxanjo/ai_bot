@@ -1,154 +1,440 @@
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 12:57:28] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 12:57:32] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/nbbRCSkZkXtVpbyxvqdvscE6xtNl3zGS HTTP/1.1" 200 -
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 46344, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': None, 'context': None}
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/shop_meta HTTP/1.1" 200 419
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:Api response Related Function: {'id': 'chatcmpl-8crM5g27TtuYduGb4EgAp4lbBb1eT', 'object': 'chat.completion', 'created': 1704272253, 'model': 'gpt-3.5-turbo-0613', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': '[{"url_params": "product_name=smartphones&price_order=desc", "is_related": "yes", "category": "smartphones"}]'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 338, 'completion_tokens': 32, 'total_tokens': 370}, 'system_fingerprint': None}
-INFO:myapp:Content exist [{"url_params": "product_name=smartphones&price_order=desc", "is_related": "yes", "category": "smartphones"}]
-INFO:myapp:parsed json: [{'url_params': 'product_name=smartphones&price_order=desc', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:Url Params: product_name=smartphones&price_order=desc
-INFO:myapp:Api request url: http://wordpress/wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc HTTP/1.1" 200 161
-INFO:myapp:api data Information for AI Assistant: 'smartphones' is not found in the database. Advise the client to use search and filters if he is still interested in this product 
-
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:myapp:Final prompt: Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.
-    Ниже мы предоставили контекстную информацию.
-    ---------------------
-    {context_str}
-    ---------------------
-    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}
-    
- ============
- History of conversation with the client: None
-=========== 
- Information about relative products Information for AI Assistant: 'smartphones' is not found in the database. Advise the client to use search and filters if he is still interested in this product 
-
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["hello i need you most expensive smartphone"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=17 request_id=b32c7593d4ba992f0006a030f8d050c0 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0280686] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    \\n ============\\n History of conversation with the client: None\\n=========== \\n Information about relative products Information for AI Assistant: \'smartphones\' is not found in the database. Advise the client to use search and filters if he is still interested in this product"}, {"role": "user", "content": "hello i need you most expensive smartphone"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=3255 request_id=b330dcb51181729f73c4187139e75407 response_code=200
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 46344, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': None, 'context': None}
 DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
 DEBUG:celery.utils.functional:
 def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
     return 1
 
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 12:57:40] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/nbbRCSkZkXtVpbyxvqdvscE6xtNl3zGS HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 13:10:18] "GET /files/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625 HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 13:10:41] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/GwTyg5iQNLMBjqk5uNgHU9s9YbctX9HG HTTP/1.1" 200 -
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 45670, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': None, 'context': None}
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/shop_meta HTTP/1.1" 200 419
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:Api response Related Function: {'id': 'chatcmpl-8crYo7FT8FvroI6uFPAOCs09ROqYY', 'object': 'chat.completion', 'created': 1704273042, 'model': 'gpt-3.5-turbo-0613', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': '[{"url_params": "product_name=smartphones&price_order=desc", "is_related": "yes", "category": "smartphones"}]'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 338, 'completion_tokens': 32, 'total_tokens': 370}, 'system_fingerprint': None}
-INFO:myapp:Content exist [{"url_params": "product_name=smartphones&price_order=desc", "is_related": "yes", "category": "smartphones"}]
-INFO:myapp:parsed json: [{'url_params': 'product_name=smartphones&price_order=desc', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:Url Params: product_name=smartphones&price_order=desc
-INFO:myapp:Api request url: http://wordpress/wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc HTTP/1.1" 200 2000
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"\r\n \tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\r\n \tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\r\n \tLeica main camera with professional optical lens Captures every great moment\r\n \tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\r\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/","weigth":"1 \u043a\u0433","dimensions":"23 &times; 23 &times; 33 \u0441\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/","weigth":"\u041d\/\u0414","dimensions":"\u041d\/\u0414","dimension_unit":"cm"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:myapp:Final prompt: Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.
-    Ниже мы предоставили контекстную информацию.
-    ---------------------
-    {context_str}
-    ---------------------
-    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}
-    
- ============
- History of conversation with the client: None
-=========== 
- Information about relative products [{"id":17,"title":"Xiaomi 13","content":"\r\n \tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\r\n \tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\r\n \tLeica main camera with professional optical lens Captures every great moment\r\n \tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\r\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/","weigth":"1 \u043a\u0433","dimensions":"23 &times; 23 &times; 33 \u0441\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/","weigth":"\u041d\/\u0414","dimensions":"\u041d\/\u0414","dimension_unit":"cm"}]
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["hello i need you most expensive smartphone"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=17 request_id=429293a4873bdc66096e2b634aa8c7f6 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0280686] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    \\n ============\\n History of conversation with the client: None\\n=========== \\n Information about relative products [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"\\\\r\\\\n \\\\tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\\\\r\\\\n \\\\tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\\\\r\\\\n \\\\tLeica main camera with professional optical lens Captures every great moment\\\\r\\\\n \\\\tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\\\\r\\\\n\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"],\\"pa_ram\\":[\\"16gb\\"]},\\"stock\\":\\"outofstock\\",\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\",\\"weigth\\":\\"1 \\\\u043a\\\\u0433\\",\\"dimensions\\":\\"23 &times; 23 &times; 33 \\\\u0441\\\\u043c\\",\\"dimension_unit\\":\\"cm\\"},{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"],\\"pa_ram\\":[\\"8gb\\"]},\\"stock\\":\\"instock\\",\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/xiaomi-12-black\\\\/\\",\\"weigth\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimensions\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimension_unit\\":\\"cm\\"}]"}, {"role": "user", "content": "hello i need you most expensive smartphone"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=2236 request_id=e9889b02c7cbcbed32b8665bb2145b2f response_code=200
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 45670, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': None, 'context': None}
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 13:10:48] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/GwTyg5iQNLMBjqk5uNgHU9s9YbctX9HG HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 13:11:47] "OPTIONS /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/GwTyg5iQNLMBjqk5uNgHU9s9YbctX9HG HTTP/1.1" 200 -
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 44453, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': 'Client: hello i need you most expensive smartphone,\nAi response: Hello! Thank you for reaching out. We have a range of smartphones available, including some high-end models. Could you please specify your budget or any specific requirements you have for the smartphone? This will help me provide you with the most suitable options.', 'context': '[{"id":17,"title":"Xiaomi 13","content":"\\r\\n \\tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\\r\\n \\tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\\r\\n \\tLeica main camera with professional optical lens Captures every great moment\\r\\n \\tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\\r\\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>16000,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","formatted_sale_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>0,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","on_sale":false,"product_link":"http:\\/\\/wordpress\\/product\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\/","weigth":"1 \\u043a\\u0433","dimensions":"23 &times; 23 &times; 33 \\u0441\\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>15000,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","formatted_sale_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>0,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","on_sale":false,"product_link":"http:\\/\\/wordpress\\/product\\/xiaomi-12-black\\/","weigth":"\\u041d\\/\\u0414","dimensions":"\\u041d\\/\\u0414","dimension_unit":"cm"}]'}
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/shop_meta HTTP/1.1" 200 419
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-INFO:myapp:Api response Related Function: {'id': 'chatcmpl-8crZsQ6ixjjUhnlHWDT8kvtSvkcLh', 'object': 'chat.completion', 'created': 1704273108, 'model': 'gpt-3.5-turbo-0613', 'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': '[{"url_params": "product_name=smartphones&price_order=desc&price=16000", "is_related": "yes", "category": "smartphones"}]'}, 'logprobs': None, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 397, 'completion_tokens': 37, 'total_tokens': 434}, 'system_fingerprint': None}
-INFO:myapp:Content exist [{"url_params": "product_name=smartphones&price_order=desc&price=16000", "is_related": "yes", "category": "smartphones"}]
-INFO:myapp:parsed json: [{'url_params': 'product_name=smartphones&price_order=desc&price=16000', 'is_related': 'yes', 'category': 'smartphones'}]
-INFO:myapp:Url Params: product_name=smartphones&price_order=desc&price=16000
-INFO:myapp:Api request url: http://wordpress/wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc&price=16000
-DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wordpress:80
-DEBUG:urllib3.connectionpool:http://wordpress:80 "GET /wp-json/chatty/v1/posts?product_name=smartphones&price_order=desc&price=16000 HTTP/1.1" 200 2000
-INFO:myapp:api data [{"id":17,"title":"Xiaomi 13","content":"\r\n \tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\r\n \tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\r\n \tLeica main camera with professional optical lens Captures every great moment\r\n \tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\r\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/","weigth":"1 \u043a\u0433","dimensions":"23 &times; 23 &times; 33 \u0441\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/","weigth":"\u041d\/\u0414","dimensions":"\u041d\/\u0414","dimension_unit":"cm"}]
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\docstore.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/docstore.json
-DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/4/data\index_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/index_store.json
-DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/4/data\vector_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/vector_store.json
-DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/4/data\graph_store.json.
-DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/4/data/graph_store.json
-INFO:myapp:Final prompt: Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.
-    Ниже мы предоставили контекстную информацию.
-    ---------------------
-    {context_str}
-    ---------------------
-    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}
-    
- ============
- History of conversation with the client: Client: hello i need you most expensive smartphone,
-Ai response: Hello! Thank you for reaching out. We have a range of smartphones available, including some high-end models. Could you please specify your budget or any specific requirements you have for the smartphone? This will help me provide you with the most suitable options.
-=========== 
- Information about relative products [{"id":17,"title":"Xiaomi 13","content":"\r\n \tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\r\n \tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\r\n \tLeica main camera with professional optical lens Captures every great moment\r\n \tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\r\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/","weigth":"1 \u043a\u0433","dimensions":"23 &times; 23 &times; 33 \u0441\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/","weigth":"\u041d\/\u0414","dimensions":"\u041d\/\u0414","dimension_unit":"cm"}][{"id":17,"title":"Xiaomi 13","content":"\r\n \tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\r\n \tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\r\n \tLeica main camera with professional optical lens Captures every great moment\r\n \tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\r\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>16000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\/","weigth":"1 \u043a\u0433","dimensions":"23 &times; 23 &times; 33 \u0441\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>15000,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","formatted_sale_price":"<span class=\"woocommerce-Price-amount amount\"><bdi>0,00&nbsp;<span class=\"woocommerce-Price-currencySymbol\">&#8381;<\/span><\/bdi><\/span>","on_sale":false,"product_link":"http:\/\/wordpress\/product\/xiaomi-12-black\/","weigth":"\u041d\/\u0414","dimensions":"\u041d\/\u0414","dimension_unit":"cm"}]
-INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
-DEBUG:openai:api_version=None data='{"input": ["budjet 16000"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
-DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
-DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=18 request_id=78093fcd73d0d9260e8566da725ae651 response_code=200
-DEBUG:llama_index.indices.utils:> Top 1 nodes:
-> [Node 909c5dd5-e87e-4999-a794-761f96e44168] [Similarity score:             -0.0283281] Welcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At Tech...
-DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
-DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nWelcome to TechHub, your ultimate destination for cutting-edge technology and innovation! At TechHub, we pride ourselves on being a premier online store dedicated to providing a curated selection of the latest and greatest in tech gadgets, including laptops, smartphones, and more.\\n\\nAbout Us:\\n\\nAt the heart of TechHub is a passion for technology and a commitment to delivering top-notch products that seamlessly blend style, functionality, and performance. With a team of tech enthusiasts, we understand the ever-evolving nature of the digital landscape and strive to stay at the forefront of the latest trends and advancements.\\n\\nOur Mission:\\n\\nOur mission at TechHub is to empower our customers with the best tools and devices that enhance their digital lifestyle. Whether you\'re a professional looking for a high-performance laptop to boost productivity or a smartphone aficionado seeking the latest flagship model, we\'ve got you covered. We believe that technology should not only meet but exceed your expectations, making every interaction with your devices a seamless and enjoyable experience.\\n\\nQuality Assurance:\\n\\nTechHub is committed to delivering products of the highest quality. We carefully curate our inventory, partnering with leading brands known for their commitment to excellence. Each product undergoes rigorous testing to ensure reliability, durability, and top-notch performance. Our dedication to quality assurance is reflected in every item we offer.\\n\\nCustomer-Centric Approach:\\n\\nAt TechHub, our customers are at the core of everything we do. We prioritize your satisfaction and strive to provide an unparalleled shopping experience. Our customer support team is ready to assist you at every step, from product inquiries to after-sales support. We value your feedback and continuously work to improve our services based on your needs.\\n\\nSecure Shopping:\\n\\nYour online security is our priority. TechHub employs state-of-the-art encryption technology to ensure that your personal information remains secure and protected. Shop with confidence, knowing that your data is in safe hands.\\n\\nExplore the world of innovation at TechHub, where technology meets lifestyle. Discover the perfect blend of style and functionality with our carefully curated selection of laptops, smartphones, and other cutting-edge gadgets. Join us on this exciting journey, and let\'s embrace the future together!\\n--------------------\\n\\u0412\\u044b \\u2014 \\u0418\\u0418 \\u0430\\u0441\\u0441\\u0438\\u0441\\u0442\\u0435\\u043d\\u0442 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0430\\u043c \\u0431\\u0443\\u0434\\u0443\\u0442 \\u0437\\u0430\\u0434\\u0430\\u043d\\u044b \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b \\u043e \\u043d\\u0430\\u0448\\u0435\\u0439 \\u043a\\u043e\\u043c\\u043f\\u0430\\u043d\\u0438\\u0438. \\u0412\\u0435\\u0436\\u043b\\u0438\\u0432\\u043e \\u043e\\u0442\\u0432\\u0435\\u0447\\u0430\\u0439\\u0442\\u0435 \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\\r\\n    \\u041d\\u0438\\u0436\\u0435 \\u043c\\u044b \\u043f\\u0440\\u0435\\u0434\\u043e\\u0441\\u0442\\u0430\\u0432\\u0438\\u043b\\u0438 \\u043a\\u043e\\u043d\\u0442\\u0435\\u043a\\u0441\\u0442\\u043d\\u0443\\u044e \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    \\u0423\\u0447\\u0438\\u0442\\u044b\\u0432\\u0430\\u044f \\u044d\\u0442\\u0443 \\u0438\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044e, \\u043e\\u0442\\u0432\\u0435\\u0442\\u044c\\u0442\\u0435, \\u043f\\u043e\\u0436\\u0430\\u043b\\u0443\\u0439\\u0441\\u0442\\u0430, \\u043d\\u0430 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441: {query_str}\\r\\n    \\n ============\\n History of conversation with the client: Client: hello i need you most expensive smartphone,\\nAi response: Hello! Thank you for reaching out. We have a range of smartphones available, including some high-end models. Could you please specify your budget or any specific requirements you have for the smartphone? This will help me provide you with the most suitable options.\\n=========== \\n Information about relative products [{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"\\\\r\\\\n \\\\tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\\\\r\\\\n \\\\tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\\\\r\\\\n \\\\tLeica main camera with professional optical lens Captures every great moment\\\\r\\\\n \\\\tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\\\\r\\\\n\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"],\\"pa_ram\\":[\\"16gb\\"]},\\"stock\\":\\"outofstock\\",\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\",\\"weigth\\":\\"1 \\\\u043a\\\\u0433\\",\\"dimensions\\":\\"23 &times; 23 &times; 33 \\\\u0441\\\\u043c\\",\\"dimension_unit\\":\\"cm\\"},{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"],\\"pa_ram\\":[\\"8gb\\"]},\\"stock\\":\\"instock\\",\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/xiaomi-12-black\\\\/\\",\\"weigth\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimensions\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimension_unit\\":\\"cm\\"}][{\\"id\\":17,\\"title\\":\\"Xiaomi 13\\",\\"content\\":\\"\\\\r\\\\n \\\\tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\\\\r\\\\n \\\\tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\\\\r\\\\n \\\\tLeica main camera with professional optical lens Captures every great moment\\\\r\\\\n \\\\tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\\\\r\\\\n\\",\\"date\\":\\"27.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"silver\\"],\\"pa_ram\\":[\\"16gb\\"]},\\"stock\\":\\"outofstock\\",\\"image_url\\":false,\\"sku\\":\\"141234\\",\\"price\\":\\"16000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>16000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\\\/\\",\\"weigth\\":\\"1 \\\\u043a\\\\u0433\\",\\"dimensions\\":\\"23 &times; 23 &times; 33 \\\\u0441\\\\u043c\\",\\"dimension_unit\\":\\"cm\\"},{\\"id\\":20,\\"title\\":\\"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM\\",\\"content\\":\\"\\",\\"date\\":\\"29.12.2023\\",\\"attributes\\":{\\"pa_color\\":[\\"black\\"],\\"pa_ram\\":[\\"8gb\\"]},\\"stock\\":\\"instock\\",\\"image_url\\":false,\\"sku\\":\\"141234-1\\",\\"price\\":\\"15000\\",\\"formatted_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>15000,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"formatted_sale_price\\":\\"<span class=\\\\\\"woocommerce-Price-amount amount\\\\\\"><bdi>0,00&nbsp;<span class=\\\\\\"woocommerce-Price-currencySymbol\\\\\\">&#8381;<\\\\/span><\\\\/bdi><\\\\/span>\\",\\"on_sale\\":false,\\"product_link\\":\\"http:\\\\/\\\\/wordpress\\\\/product\\\\/xiaomi-12-black\\\\/\\",\\"weigth\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimensions\\":\\"\\\\u041d\\\\/\\\\u0414\\",\\"dimension_unit\\":\\"cm\\"}]"}, {"role": "user", "content": "budjet 16000"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
-DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
-DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=10261 request_id=4be1ef039df809280494332f85ae5cff response_code=200
-INFO:myapp:{'api': 1, 'product_data': 'http://wordpress/wp-json/chatty/v1', 'website': 'asdf', 'id': 4, 'left_tokens': 44453, 'description': None, 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'Вы — ИИ ассистент компании. Вам будут заданы вопросы о нашей компании. Вежливо отвечайте на вопросы.\r\n    Ниже мы предоставили контекстную информацию.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Учитывая эту информацию, ответьте, пожалуйста, на вопрос: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 12, 'answer': 'Client: hello i need you most expensive smartphone,\nAi response: Hello! Thank you for reaching out. We have a range of smartphones available, including some high-end models. Could you please specify your budget or any specific requirements you have for the smartphone? This will help me provide you with the most suitable options.', 'context': '[{"id":17,"title":"Xiaomi 13","content":"\\r\\n \\tUltra-immersive display design Light up the screen to enjoy an unrivalled experience. The 1.61mm ultra-thin bezels offer a boundless vision.\\r\\n \\tBuilt for more scenarios IP68 water and dust resistant* Born splash-proof and water-resistant, thanks to the precision manufacturing. Record special memories anytime and anywhere.\\r\\n \\tLeica main camera with professional optical lens Captures every great moment\\r\\n \\tMasterpiece performance Leading Snapdragon 8 Gen 2 Boosted performance, reduced consumption\\r\\n","date":"27.12.2023","attributes":{"pa_color":["silver"],"pa_ram":["16gb"]},"stock":"outofstock","image_url":false,"sku":"141234","price":"16000","formatted_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>16000,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","formatted_sale_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>0,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","on_sale":false,"product_link":"http:\\/\\/wordpress\\/product\\/%d0%ba%d1%80%d0%be%d1%81%d1%81%d0%be%d0%b2%d0%ba%d0%b8\\/","weigth":"1 \\u043a\\u0433","dimensions":"23 &times; 23 &times; 33 \\u0441\\u043c","dimension_unit":"cm"},{"id":20,"title":"Xiaomi Redmi 12 128GB &#8212; Black &#8212; Unlocked &#8212; Dual-SIM","content":"","date":"29.12.2023","attributes":{"pa_color":["black"],"pa_ram":["8gb"]},"stock":"instock","image_url":false,"sku":"141234-1","price":"15000","formatted_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>15000,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","formatted_sale_price":"<span class=\\"woocommerce-Price-amount amount\\"><bdi>0,00&nbsp;<span class=\\"woocommerce-Price-currencySymbol\\">&#8381;<\\/span><\\/bdi><\\/span>","on_sale":false,"product_link":"http:\\/\\/wordpress\\/product\\/xiaomi-12-black\\/","weigth":"\\u041d\\/\\u0414","dimensions":"\\u041d\\/\\u0414","dimension_unit":"cm"}]'}
-INFO:werkzeug:127.0.0.1 - - [03/Jan/2024 13:12:03] "POST /projects/e47f0f811145d03c33fd6639dc3f09c0839d0891e264d849a75df04f4d047625/GwTyg5iQNLMBjqk5uNgHU9s9YbctX9HG HTTP/1.1" 200 -
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:12:21] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:12:21] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:12:21] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:12:39] "[35m[1mGET /index/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 202 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:13:08] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:13:08] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:13:08] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:14:26] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:14:26] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:14:26] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:15:01] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:15:01] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:15:01] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:15:06] "[35m[1mGET /index/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 202 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:19:40] "[35m[1mGET /index/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 202 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:20:41] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:20:41] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:20:41] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:21:36] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:21:36] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:21:36] "GET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:21:41] "[35m[1mGET /index/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 202 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:23:17] "OPTIONS /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:23:17] "[33mGET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [20/Jan/2024 22:23:17] "[33mGET /files/88a9fb231d92d6a17babf357e0c632d717611d388ea0f902fb1148cde936a77b HTTP/1.1[0m" 404 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+

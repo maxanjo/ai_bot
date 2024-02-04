@@ -23,7 +23,7 @@ env = os.environ.get('ENVIRONMENT', 'production')
 # Check if not production
 if env != 'production':
   logging.basicConfig(filename='app.log', level=logging.DEBUG)
-  
+import magic
 import sys
 from flask_cors import CORS
 from flask_cors import cross_origin
@@ -42,7 +42,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB limit
 
 def make_celery(app):
     celery = Celery(
@@ -142,7 +141,7 @@ def remove_file(token, filename):
     except OSError as e:
         return jsonify({"error": f"Error removing file: {e}"}), 500
 
-ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
+
 
 def is_related_to_products(text, api_url, history):
     old_http_proxy = os.environ.get('HTTP_PROXY')  
@@ -251,6 +250,22 @@ def is_related_to_products(text, api_url, history):
     # Handle error, unexpected response, or missing "is_related" key
     return False
 
+ALLOWED_MIME_TYPES = {
+    'application/pdf', 
+    'application/msword', 
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+    'text/plain', 
+    'text/csv', 
+    'text/html',
+    # ... Add other MIME types as needed
+}
+ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
+def allowed_mime_type(file_stream):
+    mime = magic.from_buffer(file_stream.read(1024), mime=True)
+    file_stream.seek(0)  # Reset file stream to start
+    return mime in ALLOWED_MIME_TYPES
+
+
 def allowed_file(filename):
     # Check if the file has an extension and if the extension is in the allowed set
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -279,8 +294,9 @@ def store_documents(token):
     for file in files:
         if file:
             if not allowed_file(file.filename):
-                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 400
-            
+                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 422
+            if not allowed_mime_type(file.stream):
+                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 422
             original_filename = transliterate_and_secure_filename(file.filename)
             
             if '.' not in original_filename: # Check if there is an extension in the filename

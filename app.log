@@ -1004,3 +1004,67 @@ INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:13:50] "GET /files/22ec8529418c59b90
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:13:50] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:13:50] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:14:21] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 422 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:42:52] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:42:52] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:42:52] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 13:43:03] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 422 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:55:51] "[33mGET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:55:51] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:55:51] "[33mGET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 404 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:58:50] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:58:50] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 14:58:50] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:24:36] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:24:37] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:24:37] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:25] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:25] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:25] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:35] "POST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:37] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:38] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:38] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:44] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 422 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:46] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:47] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:47] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:27:56] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 412 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:08] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:09] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:09] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:34] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 412 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:49] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:49] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:49] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:29:58] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 412 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:30:19] "OPTIONS /remove/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433/3ec2d4f9b4_sample_products.csv HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:30:19] "DELETE /remove/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433/3ec2d4f9b4_sample_products.csv HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:30:21] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:30:21] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:30:21] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:31:07] "POST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:31:19] "[31m[1mPOST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 412 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:31:54] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:31:54] "OPTIONS /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:31:54] "GET /files/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 15:32:05] "POST /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1" 200 -

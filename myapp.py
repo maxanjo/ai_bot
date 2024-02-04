@@ -23,7 +23,7 @@ env = os.environ.get('ENVIRONMENT', 'production')
 # Check if not production
 if env != 'production':
   logging.basicConfig(filename='app.log', level=logging.DEBUG)
-import magic
+# import magic
 import sys
 from flask_cors import CORS
 from flask_cors import cross_origin
@@ -260,16 +260,26 @@ ALLOWED_MIME_TYPES = {
     # ... Add other MIME types as needed
 }
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx', 'rtf', 'txt', 'csv', 'html'}
-def allowed_mime_type(file_stream):
-    mime = magic.from_buffer(file_stream.read(1024), mime=True)
-    file_stream.seek(0)  # Reset file stream to start
-    return mime in ALLOWED_MIME_TYPES
+# def allowed_mime_type(file_stream):
+#     mime = magic.from_buffer(file_stream.read(1024), mime=True)
+#     file_stream.seek(0)  # Reset file stream to start
+#     return mime in ALLOWED_MIME_TYPES
 
 
 def allowed_file(filename):
     # Check if the file has an extension and if the extension is in the allowed set
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def get_size(folder_path):
+    total_size = 0
+    with os.scandir(folder_path) as entries:
+        for entry in entries:
+            if entry.is_file():
+                total_size += os.path.getsize(entry.path)
+    return total_size
 
+    return total_size
+
+    
 @app.route("/store/<token>", methods=["POST"])
 def store_documents(token):
     project = get_project(token)
@@ -280,23 +290,43 @@ def store_documents(token):
     project_folder = f'{storage}{project_id}'
     if not os.path.exists(project_folder):
         os.makedirs(project_folder)
-
+    
     # Check if files were uploaded
     if 'files[]' not in request.files:
         return jsonify({"error": "No files were uploaded"}), 400
 
     files = request.files.getlist('files[]')
+    file_sizes = []
 
+    for file in files:
+        # Seek to the end of the file to get its size
+        file.seek(0, os.SEEK_END)
+        # Tell returns the current position in bytes, which in this case is the file size
+        file_size = file.tell()
+        # Add the file size to our list
+        file_sizes.append(file_size)
+        # Remember to seek back to the start of the file for later use
+        file.seek(0)
+
+        # Now file_sizes list contains the sizes of all the files
     if not files:
         return jsonify({"error": "No files were uploaded"}), 400
+    total_size = sum(file_sizes) + get_size(project_folder)  # Total size of all files
 
+    max_size = 2*1024*1024
+    services = project.get('services', '')
+    if services is not None and 'customInterface' in services.split(','):
+        max_size = 50 * 1024 * 1024
+    
+    if total_size > max_size:
+        return jsonify({'error': 'Project folder size exceeded the limits of your subscription plan'}), 412
     saved_files = []
     for file in files:
         if file:
             if not allowed_file(file.filename):
                 return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 422
-            if not allowed_mime_type(file.stream):
-                return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 422
+            # if not allowed_mime_type(file.stream):
+            #     return jsonify({"error": f"Invalid file type. Allowed types: pdf, doc, docx, rtf, txt, csv."}), 422
             original_filename = transliterate_and_secure_filename(file.filename)
             
             if '.' not in original_filename: # Check if there is an extension in the filename

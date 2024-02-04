@@ -42,6 +42,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB limit
 
 def make_celery(app):
     celery = Celery(
@@ -323,8 +324,6 @@ def get_project_details(token, session_id):
     product_response = ''
     if(project.get('api')):
         product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))
-  
-    
     allowed_website = project.get('website')
     openai.api_key = os.environ['OPENAI_API_KEY']
     storageProject = f'{storage}{project["id"]}/data'

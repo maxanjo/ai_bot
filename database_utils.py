@@ -22,12 +22,12 @@ def get_project(token, session_id = None):
                     p.api, p.product_data, p.website, p.id, 
                     u.left_tokens, p.description, u.subscription_plan,
                     ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id,
-                    GROUP_CONCAT(ss.name) as services,
+                    GROUP_CONCAT(DISTINCT s.name SEPARATOR ', ') AS services,
                     c.answer, c.context
                 FROM projects p
                 LEFT JOIN ai_settings ai ON p.id = ai.project_id
                 LEFT JOIN users u ON p.user_id = u.id
-                LEFT JOIN service_subscriptions ss ON p.user_id = ss.user_id
+                LEFT JOIN subscriptions s ON p.user_id = s.user_id
                 LEFT JOIN chats c ON p.id = c.project_id AND c.session_id = %s
                 WHERE p.token = %s
                 GROUP BY 

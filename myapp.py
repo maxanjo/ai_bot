@@ -315,7 +315,7 @@ def store_documents(token):
 
     max_size = 2*1024*1024
     services = project.get('services', '')
-    if services is not None and 'customInterface' in services.split(','):
+    if services is not None and 'messages.customInterface' in services.split(','):
         max_size = 50 * 1024 * 1024
     
     if total_size > max_size:

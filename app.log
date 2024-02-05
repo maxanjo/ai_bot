@@ -1114,3 +1114,173 @@ INFO:werkzeug:[33mPress CTRL+C to quit[0m
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:09] "[33mGET /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1[0m" 404 -
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:09] "OPTIONS /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:09] "[33mGET /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1[0m" 404 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:37] "GET /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:38] "OPTIONS /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 17:14:38] "GET /files/9b4dadd90eab55a363ca69c0ff2bcd584458f3a5120b1a4c136c6c3deda77f6e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:15:26] "[31m[1mGET /store/22ec8529418c59b902986572c1ce65fb8345f648d5b97dd12ac60e8102acc433 HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:15:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:05] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:05] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:05] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:15] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:16] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:16] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:54] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:55] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 18:36:55] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:06:01] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:01] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:01] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:01] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:04] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:24] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:24] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:24] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:43:59] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:44:00] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:44:00] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:39] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:40] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:40] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:47] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:48] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:46:48] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:47:11] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:47:12] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 21:47:12] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 22:33:20] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 22:33:21] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 22:33:21] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:24:00] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:24:01] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:24:01] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:02] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:03] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:03] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:25] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:26] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:26] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:39] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:40] "OPTIONS /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Feb/2024 23:27:40] "GET /files/700a0185d6135abda2dad8552269fb363eadfbd6de3ffa4ba5e3b843140fa97c HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:00] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:00] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:00] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:15] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:15] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:15] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:35:40] "POST /store/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:38:45] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:38:45] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:38:45] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:38:50] "[35m[1mGET /index/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1[0m" 202 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:11] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:12] "OPTIONS /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:12] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:18] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:22] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/po1LbiGI8K62hRb6GCK34ep04D03xtzD HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1039180, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Final prompt: You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.
+    Below, we have provided contextual information.
+    ---------------------
+    {context_str}
+    ---------------------
+    Given this information, please answer the question: {query_str}
+    
+ ============
+ History of conversation with the client: None
+=========== 
+ Information about relative products 
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=15 request_id=db8157582a50961de7be208f0ccda368 response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.0301768] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client: None\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=536 request_id=365e99334a87ea84663978471cd8d076 response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1039180, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [05/Feb/2024 12:39:24] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/po1LbiGI8K62hRb6GCK34ep04D03xtzD HTTP/1.1" 200 -

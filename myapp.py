@@ -368,6 +368,9 @@ def get_project_details(token, session_id):
     if not project:
         return jsonify({'error': 'Project not found'}), 404
     product_response = ''
+    if project.get('is_active', False):
+        return jsonify({'error': 'Operation is not allowed'}), 403
+
     if(project.get('api')):
         product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))
     allowed_website = project.get('website')

@@ -26,15 +26,14 @@ headers = {
 
 
 @celery.task()
-def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
-    
-
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):
     chatData = {
         "user_id": user_id,
         "project_id": project_id,
         "session_id": session,
         "total_tokens": total_tokens,
         "answer": answer,
+        "playground": playground,
         "context": context
     }
 

@@ -158,3 +158,299 @@ DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completio
 DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=992 request_id=6535c87624bd07255482cbd61935b439 response_code=200
 INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031962, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': "Client: hello\nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name?\nAi response: Your name is Max.\nClient: i love you\nAi response: Thank you for your kind words, but as an AI assistant, I don't have the capability to feel emotions. However, I'm here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: are you a company?\nAi response: No, I am not a company. I am an AI assistant working for the company. How can I assist you today?\nClient: hello \nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name\nAi response: Your name is Max.\nClient: i  love you\nAi response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?", 'context': None}
 INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 17:23:37] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 17:32:21] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 17:32:29] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:54:25] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:54:28] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': "Client: hello\nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name?\nAi response: Your name is Max.\nClient: i love you\nAi response: Thank you for your kind words, but as an AI assistant, I don't have the capability to feel emotions. However, I'm here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: are you a company?\nAi response: No, I am not a company. I am an AI assistant working for the company. How can I assist you today?\nClient: hello \nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name\nAi response: Your name is Max.\nClient: i  love you\nAi response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: what compay are you working\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?", 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Shortened history: Client: what is my name
+Ai response: Your name is Max.
+Client: i  love you
+Ai response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?
+Client: what compay are you working
+Ai response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=53 request_id=07ca9a72eff70ff58d7665ec20cb3fbc response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.0301768] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client:\\nClient: what is my name\\nAi response: Your name is Max.\\nClient: i  love you\\nAi response: Thank you for your kind words, but I\'m just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\\nClient: what compay are you working\\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=651 request_id=749cf185f5d492160381f7f3abbea4ae response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': "Client: hello\nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name?\nAi response: Your name is Max.\nClient: i love you\nAi response: Thank you for your kind words, but as an AI assistant, I don't have the capability to feel emotions. However, I'm here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: are you a company?\nAi response: No, I am not a company. I am an AI assistant working for the company. How can I assist you today?\nClient: hello \nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name\nAi response: Your name is Max.\nClient: i  love you\nAi response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: what compay are you working\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?", 'context': None}
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context):
+    return 1
+
+ERROR:myapp:Exception on /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL [POST]
+Traceback (most recent call last):
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\OSPanel\domains\ai_assistant\api\myapp.py", line 488, in get_project_details
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text}\nAi response: {response.response}", product_response, playground])
+  File "C:\OSPanel\domains\ai_assistant\api\env\Lib\site-packages\celery\app\task.py", line 559, in apply_async
+    check_arguments(*(args or ()), **(kwargs or {}))
+TypeError: send_chat_request() takes 6 positional arguments but 7 were given
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:54:30] "[35m[1mPOST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL HTTP/1.1[0m" 500 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:55:41] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:55:47] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': "Client: hello\nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name?\nAi response: Your name is Max.\nClient: i love you\nAi response: Thank you for your kind words, but as an AI assistant, I don't have the capability to feel emotions. However, I'm here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: are you a company?\nAi response: No, I am not a company. I am an AI assistant working for the company. How can I assist you today?\nClient: hello \nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name\nAi response: Your name is Max.\nClient: i  love you\nAi response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: what compay are you working\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?", 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Shortened history: Client: what is my name
+Ai response: Your name is Max.
+Client: i  love you
+Ai response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?
+Client: what compay are you working
+Ai response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=17 request_id=324f60a4ddbb325f293f7923a45b062e response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.030115] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client:\\nClient: what is my name\\nAi response: Your name is Max.\\nClient: i  love you\\nAi response: Thank you for your kind words, but I\'m just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\\nClient: what compay are you working\\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=630 request_id=241db9403cb9aaa14a27068e56d03ed8 response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': "Client: hello\nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name?\nAi response: Your name is Max.\nClient: i love you\nAi response: Thank you for your kind words, but as an AI assistant, I don't have the capability to feel emotions. However, I'm here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: are you a company?\nAi response: No, I am not a company. I am an AI assistant working for the company. How can I assist you today?\nClient: hello \nAi response: Hello! How can I assist you today?\nClient: my name is max\nAi response: Hello Max! How can I assist you today?\nClient: what is my name\nAi response: Your name is Max.\nClient: i  love you\nAi response: Thank you for your kind words, but I'm just an AI assistant here to assist you with any questions or concerns you may have about our company. How can I assist you today?\nClient: what compay are you working\nAi response: I am an AI assistant working for an online e-shop selling clothes. How can I assist you today?", 'context': None}
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:55:50] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/pnF3pvDwpsdnccAlStYbHYHJbxXjF4xL HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:57:44] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:57:47] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/o4ZEXrbPjoeX13HRSTiyN4y5r2UABsL9 HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Shortened history: 
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=41 request_id=084993772d85b7526c9715c428485606 response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.030115] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client:\\n\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=726 request_id=0713b056ecfff9048ec23fab26fed119 response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:57:49] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/o4ZEXrbPjoeX13HRSTiyN4y5r2UABsL9 HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:59:22] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:59:26] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/AHaU78tO3Os5yZuxVa4t9jJeU3itko2v HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Shortened history: 
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=23 request_id=335b96328c8705704adaa001abf5ba99 response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.030115] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client:\\n\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=654 request_id=d23f6b39c3b41fcb72d9173578befd7a response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031755, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:59:28] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/AHaU78tO3Os5yZuxVa4t9jJeU3itko2v HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:59:56] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 19:59:59] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/h8rQV1Wgq82n5kspYjaLlPFD0A2hCT6D HTTP/1.1" 200 -
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031647, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:Shortened history: 
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=18 request_id=76cc315ad9a8b4bd7b5d3769924af11f response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.030115] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\r\\n    \\n ============\\n History of conversation with the client:\\n\\n=========== \\n Information about relative products"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=964 request_id=eabb0e648f77a088c023fa48f5ccffc1 response_code=200
+INFO:myapp:{'api': 0, 'product_data': None, 'website': 'sdfgsdfg.rt', 'id': 6, 'left_tokens': 1031647, 'description': None, 'subscription_plan': 'free', 'temperature': Decimal('0.00'), 'model': 'gpt-3.5-turbo', 'prompt': 'You are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\r\n    Below, we have provided contextual information.\r\n    ---------------------\r\n    {context_str}\r\n    ---------------------\r\n    Given this information, please answer the question: {query_str}\r\n    ', 'response_mode': 'compact', 'user_id': 2, 'services': 'messages.customInterface', 'answer': None, 'context': None}
+INFO:werkzeug:127.0.0.1 - - [06/Feb/2024 20:00:01] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/h8rQV1Wgq82n5kspYjaLlPFD0A2hCT6D HTTP/1.1" 200 -

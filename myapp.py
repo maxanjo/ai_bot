@@ -363,10 +363,14 @@ import tiktoken
 # @cross_origin(origin='http://127.0.0.1:8000')
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
+    playground = request.json.get("playground", None)
     project = get_project(token, session_id)
-    app.logger.info(project)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
+    if not isinstance(query_text, str):
+        return jsonify({'error': 'Text must be a string'}), 400  
+    if len(query_text) > 1000:
+        return jsonify({'error': 'Text cannot exceed 1000 characters'}), 400
     product_response = ''
     if project.get('is_active', False):
         return jsonify({'error': 'Operation is not allowed'}), 403
@@ -482,9 +486,8 @@ def get_project_details(token, session_id):
     content = logs.payload
     result = {'result': response.response, 'logs': str(event_pairs)}
     llama_debug.flush_event_logs()
-    app.logger.info(project)
     from tasks import send_chat_request
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text}\nAi response: {response.response}", product_response])
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text}\nAi response: {response.response}", product_response, playground])
     
         
     return jsonify(result), 200

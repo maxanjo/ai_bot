@@ -408,9 +408,40 @@ def get_project_details(token, session_id):
     service_context = ServiceContext.from_defaults(callback_manager=callback_manager, llm=llm)
     context = project.get('context') if project.get('context') is not None else ''
     context += product_response
-    chat_history = f"\n ============\n History of conversation with the client: {project.get('answer')}"
+    # Extract the chat history
+    full_chat_history =  project.get('answer')
+    short_chat_history = ''
+    # Existing 'answer' string from the project
+    answer_string = project.get('answer')
+
+    if answer_string:
+        # Split the string into messages based on the pattern "Client:"
+        message_pairs = answer_string.split("Client:")
+
+        # Remove the last empty element, if any, caused due to splitting
+        if message_pairs and message_pairs[-1] == '':
+            message_pairs = message_pairs[:-1]
+
+        # Each message pair contains part of an AI response and a client message.
+        # Since we want the last three pairs, we need to find the appropriate split index:
+        # Keep only the last three message exchanges (pairs of client and AI response)
+        if len(message_pairs) > 3:
+            message_pairs = message_pairs[-3:]
+
+        # Reconstruct the chat history from the last three message pairs
+        short_chat_history = "Client:".join(message_pairs)
+
+        # Ensure that "Client:" leads the reconstructed chat history
+        if not short_chat_history.startswith("Client:"):
+            short_chat_history = "Client:" + short_chat_history
+
+    # Now, create the complete `prompt` string including only the short chat history
+    chat_history = f"\n ============\n History of conversation with the client:\n{short_chat_history}"
+    # Log the shortened chat history
+    app.logger.info(f"Shortened history: {short_chat_history}")
+    # Construct the prompt with the shortened chat history
+   
     prompt = project['prompt'] + chat_history + '\n=========== \n Information about relative products ' + context
-    app.logger.info(f"Final prompt: {prompt}")
     # load index
     try:
         if(project['response_mode'] != 'tree_summarize'):
@@ -453,7 +484,7 @@ def get_project_details(token, session_id):
     llama_debug.flush_event_logs()
     app.logger.info(project)
     from tasks import send_chat_request
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text},\nAi response: {response.response}", product_response])
+    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text}\nAi response: {response.response}", product_response])
     
         
     return jsonify(result), 200

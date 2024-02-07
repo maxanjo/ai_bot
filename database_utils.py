@@ -19,7 +19,7 @@ def get_project(token, session_id = None):
             #p.api, p.product_data, p.website, p.id, u.left_tokens, p.description, ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
             query = """
                 SELECT 
-                    p.api, p.product_data, p.website, p.id, 
+                    p.api, p.product_data, p.website, p.id, is_indexed,
                     u.left_tokens, p.description, u.subscription_plan,
                     ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id,
                     GROUP_CONCAT(DISTINCT s.name SEPARATOR ', ') AS services,

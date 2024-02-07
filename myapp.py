@@ -102,8 +102,11 @@ def projectInfo(token):
 @app.route("/", methods=["GET"])
 def sayHello():
     return 'hello привет', 200
+
 @app.route("/files/<token>", methods=["GET"])
 def list_files(token):
+    app.logger.info(f"got request: ")
+
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
@@ -113,7 +116,6 @@ def list_files(token):
     # Check if the project folder exists
     if os.path.exists(project_folder):
         files = os.listdir(project_folder)
-
     return jsonify({"files": files, 'id': project_id}), 200
 
 @app.route("/remove/<token>/<filename>", methods=["DELETE"])
@@ -367,6 +369,10 @@ def get_project_details(token, session_id):
     project = get_project(token, session_id)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
+    if not project['is_indexed']:
+        return jsonify({'error': 'Project is not indexed'}), 400
+    if not project['is_active']:
+        return jsonify({'error': 'BAN'}), 403
     if not isinstance(query_text, str):
         return jsonify({'error': 'Text must be a string'}), 400  
     if len(query_text) > 1000:

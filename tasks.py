@@ -60,10 +60,11 @@ def send_chat_request(user_id, project_id, session, total_tokens, answer, contex
         print(f"Error sending data to API: {e}")
 
 @celery.task()
-def sendEmbeddingRequest(user_id, total_tokens):
+def sendEmbeddingRequest(user_id, total_tokens, project_id):
     chatData = {
         "user_id": user_id,
-        "total_tokens": total_tokens
+        "total_tokens": total_tokens,
+        "project_id": project_id
     }
     
     try:

@@ -106,7 +106,7 @@ def process_set_vector_index(self, token, task_id):
             index.storage_context.persist(os.path.join(storageProject, 'data'))
             spent_tokens = token_counter.total_embedding_token_count / 10
             from tasks import sendEmbeddingRequest
-            sendEmbeddingRequest.apply_async(args=[project['user_id'], spent_tokens])
+            sendEmbeddingRequest.apply_async(args=[project['user_id'], spent_tokens, project["id"]])
     
             # reset counts
             token_counter.reset_counts()

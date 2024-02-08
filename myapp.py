@@ -359,7 +359,7 @@ def setIndex(token):
     return jsonify({'message': 'Task started', 'task_id': task.id}), 202
    
 import tiktoken
-@app.route("/projects/<token>/<session_id>/", methods=["POST"])
+@app.route("/projects/<token>/<session_id>", methods=["POST"])
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
     playground = request.json.get("playground", None)

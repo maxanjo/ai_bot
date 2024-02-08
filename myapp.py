@@ -439,14 +439,16 @@ def get_project_details(token, session_id):
         # Ensure that "Client:" leads the reconstructed chat history
         if not short_chat_history.startswith("Client:"):
             short_chat_history = "Client:" + short_chat_history
-
-    # Now, create the complete `prompt` string including only the short chat history
-    chat_history = f"\n ============\n History of conversation with the client:\n{short_chat_history}"
+    if(context != ''):
+        context = '\n=========== \n Information about relative products ' + context
+    chat_history = ''
+    if(short_chat_history != ''):
+        chat_history = f"\n ============\n History of conversation with the client:\n{short_chat_history}"
     # Log the shortened chat history
-    app.logger.info(f"Shortened history: {short_chat_history}")
     # Construct the prompt with the shortened chat history
+    app.logger.info(f"short history {chat_history}")  # Log the full exception traceback
    
-    prompt = project['prompt'] + chat_history + '\n=========== \n Information about relative products ' + context
+    prompt = project['prompt'] + chat_history + context
     # load index
     try:
         if(project['response_mode'] != 'tree_summarize'):

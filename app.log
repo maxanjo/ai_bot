@@ -87,3 +87,45 @@ DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": 
 DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
 DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=509 request_id=req_d37d78c5e574a7573b915ecaa8ce941c response_code=200
 INFO:werkzeug:127.0.0.1 - - [08/Feb/2024 14:21:53] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/VA9TE7NQxGCjSp8P8W8nyRKEvYznGeDl HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [08/Feb/2024 14:22:25] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [08/Feb/2024 14:22:30] "OPTIONS /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/VA9TE7NQxGCjSp8P8W8nyRKEvYznGeDl HTTP/1.1" 200 -
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\docstore.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/docstore.json
+DEBUG:llama_index.storage.kvstore.simple_kvstore:Loading llama_index.storage.kvstore.simple_kvstore from projects/6/data\index_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/index_store.json
+DEBUG:llama_index.vector_stores.simple:Loading llama_index.vector_stores.simple from projects/6/data\vector_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/vector_store.json
+DEBUG:llama_index.graph_stores.simple:Loading llama_index.graph_stores.simple from projects/6/data\graph_store.json.
+DEBUG:fsspec.local:open file: C:/OSPanel/domains/ai_assistant/api/projects/6/data/graph_store.json
+INFO:myapp:short history 
+ ============
+ History of conversation with the client:
+Client: hello my name is max
+Ai response: Hello Max! How can I assist you today?
+Client: what is my name?
+Ai response: Your name is Max.
+Client: hello
+Ai response: Hello! How can I assist you today?
+INFO:llama_index.indices.loading:Loading indices with ids: ['vector_index']
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/embeddings
+DEBUG:openai:api_version=None data='{"input": ["hello"], "model": "text-embedding-ada-002", "encoding_format": "base64"}' message='Post details'
+DEBUG:urllib3.util.retry:Converted retries value: 2 -> Retry(total=2, connect=None, read=None, redirect=None, status=None)
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.openai.com:443
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/embeddings HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/embeddings processing_ms=20 request_id=req_b44576d34d9096b9d0b073f931c1917f response_code=200
+DEBUG:llama_index.indices.utils:> Top 1 nodes:
+> [Node 47fe2f56-6a59-4604-b8b6-5ab20316554d] [Similarity score:             -0.030115] online e shop selling cloth...
+DEBUG:openai:message='Request to OpenAI API' method=post path=https://api.openai.com/v1/chat/completions
+DEBUG:openai:api_version=None data='{"messages": [{"role": "system", "content": "Context information is below.\\n--------------------\\nonline e shop selling cloth\\n--------------------\\nYou are the AI assistant of the company. You will be asked questions about our company. Respond politely to the questions.\\r\\n    Below, we have provided contextual information.\\r\\n    ---------------------\\r\\n    {context_str}\\r\\n    ---------------------\\r\\n    Given this information, please answer the question: {query_str}\\n ============\\n History of conversation with the client:\\nClient: hello my name is max\\nAi response: Hello Max! How can I assist you today?\\nClient: what is my name?\\nAi response: Your name is Max.\\nClient: hello\\nAi response: Hello! How can I assist you today?"}, {"role": "user", "content": "hello"}], "stream": false, "model": "gpt-3.5-turbo", "temperature": 0, "max_tokens": null}' message='Post details'
+DEBUG:urllib3.connectionpool:https://api.openai.com:443 "POST /v1/chat/completions HTTP/1.1" 200 None
+DEBUG:openai:message='OpenAI API response' path=https://api.openai.com/v1/chat/completions processing_ms=686 request_id=req_676597cf993686aec9c71f8152b96def response_code=200
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [08/Feb/2024 14:22:32] "POST /projects/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0/VA9TE7NQxGCjSp8P8W8nyRKEvYznGeDl HTTP/1.1" 200 -

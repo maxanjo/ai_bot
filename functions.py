@@ -70,8 +70,8 @@ def process_set_vector_index(self, token, task_id):
             return
         storageProject = f'{storage}{project["id"]}'
         folder_size = calculate_folder_size(storageProject)
-        if(project['subscription_plan'] == 'free' and folder_size > 2):
-            send_error_payload(task_id, "Файлы должны быть меньше 2 мегабайт. Перейдите на платный тариф, чтобы загружать больше")
+        if(not project['services'] and folder_size > 2):
+            send_error_payload(task_id, "Files must be less than 2 MB. But a subscription plan to increase limits")
             return
         if(folder_size > 50):
             send_error_payload(task_id, "Files must be less than 50 mb")

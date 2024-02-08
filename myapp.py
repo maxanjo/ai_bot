@@ -105,8 +105,6 @@ def sayHello():
 
 @app.route("/files/<token>", methods=["GET"])
 def list_files(token):
-    app.logger.info(f"got request: ")
-
     project = get_project(token)
     if not project:
         return jsonify({'error': 'Project not found'}), 404
@@ -361,8 +359,7 @@ def setIndex(token):
     return jsonify({'message': 'Task started', 'task_id': task.id}), 202
    
 import tiktoken
-@app.route("/projects/<token>/<session_id>", methods=["POST"])
-# @cross_origin(origin='http://127.0.0.1:8000')
+@app.route("/projects/<token>/<session_id>/", methods=["POST"])
 def get_project_details(token, session_id):
     query_text = request.json.get("text", None)
     playground = request.json.get("playground", None)

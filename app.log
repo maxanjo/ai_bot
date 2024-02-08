@@ -119,3 +119,82 @@ INFO:myapp:got request:
 INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 19:01:20] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
 INFO:myapp:got request: 
 INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 19:01:20] "GET /files/1548ab096a495630d98f65916ff4cd4250551836e1d305beeb294fc60c4a0be0 HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def sendEmbeddingRequest(user_id, total_tokens, project_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def backend_cleanup():
+    return 1
+
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chain(*args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):
+    return 1
+
+DEBUG:celery.utils.functional:
+def xstarmap(task, it):
+    return 1
+
+DEBUG:celery.utils.functional:
+def accumulate(self, *args, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def process_set_vector_index(self, token, task_id):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+DEBUG:celery.utils.functional:
+def chunks(task, it, n):
+    return 1
+
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:56:56] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:56:56] "OPTIONS /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:56:56] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:57:16] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:57:16] "OPTIONS /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:57:16] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:57:47] "POST /store/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+DEBUG:root:This is a debug message
+DEBUG:celery.utils.functional:
+def set_vector_index_task(self, token):
+    return 1
+
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:57:51] "[35m[1mGET /index/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1[0m" 202 -
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:58:55] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:58:55] "OPTIONS /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -
+INFO:myapp:got request: 
+INFO:werkzeug:127.0.0.1 - - [07/Feb/2024 23:58:55] "GET /files/82debe0d095da22cc15e51fc53465de81fa22603ddcffe912fa1a0121e778fbd HTTP/1.1" 200 -

@@ -375,8 +375,6 @@ def get_project_details(token, session_id):
     if len(query_text) > 1000:
         return jsonify({'error': 'Text cannot exceed 1000 characters'}), 400
     product_response = ''
-    if project.get('is_active', False):
-        return jsonify({'error': 'Operation is not allowed'}), 403
 
     if(project.get('api')):
         product_response = is_related_to_products(query_text, project.get('product_data'), project.get('answer'))

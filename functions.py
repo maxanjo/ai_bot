@@ -73,8 +73,8 @@ def process_set_vector_index(self, token, task_id):
         if(not project['services'] and folder_size > 2):
             send_error_payload(task_id, "Files must be less than 2 MB. But a subscription plan to increase limits")
             return
-        if(folder_size > 50):
-            send_error_payload(task_id, "Files must be less than 50 mb")
+        if(folder_size > 20):
+            send_error_payload(task_id, "Files must be less than 20 mb")
             return
         openai.api_key = os.environ['OPENAI_API_KEY']
         llama_logger = LlamaLogger()

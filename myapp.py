@@ -192,19 +192,16 @@ def is_related_to_products(text, api_url, history):
     
     if response.status_code == 200:
         api_response = response.json()
-        app.logger.info(f"Api response Related Function: {api_response}")
         if "choices" in api_response and api_response["choices"]:
             choice = api_response["choices"][0]
             
             if "message" in choice and "content" in choice["message"]:
                 content = choice["message"]["content"]
                 corrected_content = content.replace("'", '"')
-                app.logger.info(f"Content exist {corrected_content}")
 
                 try:
                     # Parse the JSON content
                     data = json.loads(corrected_content)
-                    app.logger.info(f"parsed json: {data}")
                     
                     # Iterate through the data array
                     for item in data:
@@ -213,7 +210,6 @@ def is_related_to_products(text, api_url, history):
                             item = json.loads(item)
                         url_params = item.get("url_params")
                         is_related = item.get("is_related")
-                        app.logger.info(f"Url Params: {url_params}")
 
                         if is_related == "yes" and url_params:
                             from urllib.parse import parse_qs, urlencode
@@ -222,7 +218,6 @@ def is_related_to_products(text, api_url, history):
                             os.environ['HTTP_PROXY'] = ''
                             os.environ['HTTPS_PROXY'] = ''
                             url = f"http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}"
-                            app.logger.info(f"Api request url: {url}")
 
                             # Make API calls to each URL
                             response = requests.get(f'http://wordpress/wp-json/chatty/v1/posts?{encoded_dict}', proxies=None)
@@ -232,14 +227,12 @@ def is_related_to_products(text, api_url, history):
                             os.environ['HTTPS_PROXY'] = old_https_proxy
                             if response.status_code == 200:
                                 api_data = response.text
-                                app.logger.info(f'api data ' + api_data)
                                 return api_data
 
                             else:
                                 return ''
                 
                 except json.JSONDecodeError as e:
-                    app.logger.info(f"json error: {e}")
 
                     return ''
 
@@ -446,7 +439,6 @@ def get_project_details(token, session_id):
         chat_history = f"\n ============\n History of conversation with the client:\n{short_chat_history}"
     # Log the shortened chat history
     # Construct the prompt with the shortened chat history
-    app.logger.info(f"short history {chat_history}")  # Log the full exception traceback
    
     prompt = project['prompt'] + chat_history + context
     # load index

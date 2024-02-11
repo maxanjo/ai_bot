@@ -69,6 +69,12 @@ def process_set_vector_index(self, token, task_id):
             send_error_payload(task_id, "Недостаточно токенов")
             return
         storageProject = f'{storage}{project["id"]}'
+        files_in_folder = [f for f in os.listdir(storageProject) if os.path.isfile(os.path.join(storageProject, f))]
+
+        # Check if the list of files is not empty, which means there are files present
+        if not files_in_folder:
+            send_error_payload(task_id, "Please upload files first")
+
         folder_size = calculate_folder_size(storageProject)
         if(not project['services'] and folder_size > 2):
             send_error_payload(task_id, "Files must be less than 2 MB. But a subscription plan to increase limits")

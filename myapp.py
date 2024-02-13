@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, stream_with_context
+from threading import Thread
 from llama_index.logger import LlamaLogger
 from database_utils import get_project
 from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType, TokenCountingHandler
@@ -354,6 +355,7 @@ def setIndex(token):
 import tiktoken
 @app.route("/projects/<token>/<session_id>", methods=["POST"])
 def get_project_details(token, session_id):
+
     query_text = request.json.get("text", None)
     playground = request.json.get("playground", None)
     project = get_project(token, session_id)
@@ -377,11 +379,11 @@ def get_project_details(token, session_id):
     laravel_api_referer = os.environ.get('LARAVEL_API')
 
     # Check if the request comes from an allowed website or the specified Laravel API Referer
-    if 'Referer' not in request.headers or (
-        allowed_website not in request.headers['Referer'] and
-        laravel_api_referer not in request.headers['Referer']
-    ):
-        return jsonify({'error': 'Access restricted'}), 403
+    # if 'Referer' not in request.headers or (
+    #     allowed_website not in request.headers['Referer'] and
+    #     laravel_api_referer not in request.headers['Referer']
+    # ):
+    #     return jsonify({'error': 'Access restricted'}), 403
 
     left_tokens = project.get('left_tokens', 0)
     memory = ChatMemoryBuffer.from_defaults(token_limit=1500)
@@ -441,6 +443,11 @@ def get_project_details(token, session_id):
     # Construct the prompt with the shortened chat history
    
     prompt = project['prompt'] + chat_history + context
+
+    template = (
+        prompt
+    )
+    qa_template = Prompt(template)
     # load index
     try:
         if(project['response_mode'] != 'tree_summarize'):
@@ -451,19 +458,40 @@ def get_project_details(token, session_id):
         # ... Your other code ...
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)  # Log the full exception traceback
-    if(project['response_mode'] != 'tree_summarize'):
-        chat_engine = index.as_chat_engine(
-            chat_mode="context",
-            memory=memory,
-            system_prompt=prompt,
-            service_context=service_context, response_mode=project['response_mode']
-        )
     else:
-        query_engine = index.as_query_engine(service_context=service_context, response_mode=project['response_mode'])  
+        query_engine = index.as_query_engine(streaming=True, text_qa_template=qa_template, service_context=service_context, response_mode=project['response_mode'])  
     if query_text is None:
         return "No text found, please include a ?text=blah parameter in the URL", 400
     try:
-        response = chat_engine.chat(query_text)
+        response_stream = query_engine.query(query_text)
+        llama_debug.flush_event_logs()
+        from tasks import send_chat_request
+        from flask.signals import request_finished
+        full_response_text = []
+
+        def generate():
+            for text in response_stream.response_gen:
+                app.logger.info(f"Yielding text: {text}")  # New logging line
+                full_response_text.append(str(text))
+                yield str(text)
+
+        def after_request(sender, response, *extra):
+            full_response_combined = ''.join(full_response_text)
+            send_chat_request.delay(
+                project['user_id'], project['id'], session_id,
+                token_counter.total_llm_token_count,
+                f"Client: {query_text}\nAI response: {full_response_combined}",
+                product_response, playground
+            )
+            app.logger.info(f"Tokens {token_counter.total_llm_token_count}")
+            app.logger.info(f"Answer {full_response_combined}")
+
+        # Connect the signal with the after_request function
+        request_finished.connect(after_request, app)
+
+        # Stream the response
+        return Response(stream_with_context(generate()), mimetype='text/plain')
+
     except Exception as e:
         app.logger.error("An error occurred:", exc_info=True)
         if isinstance(e.__cause__, openai.error.AuthenticationError):
@@ -476,16 +504,8 @@ def get_project_details(token, session_id):
             return jsonify({'error_message': "OpenAI API request exceeded rate limit: " + str(e.__cause__)}), 500
         else:
             return jsonify({'error_message': str(e)}), 500
-    event_pairs = llama_debug.get_llm_inputs_outputs()
-    logs = event_pairs[0][0]
-    content = logs.payload
-    result = {'result': response.response, 'logs': str(event_pairs)}
-    llama_debug.flush_event_logs()
-    from tasks import send_chat_request
-    send_chat_request.apply_async(args=[project['user_id'], project['id'], session_id, token_counter.total_llm_token_count,f"Client: {query_text}\nAi response: {response.response}", product_response, playground])
+
     
-        
-    return jsonify(result), 200
 
 
 def transliterate_and_secure_filename(filename):
@@ -503,5 +523,6 @@ def transliterate_and_secure_filename(filename):
     return secured_filename
     
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)  # Turn off debug for production-like behavior
+
 

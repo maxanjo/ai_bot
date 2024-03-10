@@ -354,6 +354,7 @@ def setIndex(token):
 import tiktoken
 @app.route("/projects/<token>/<session_id>", methods=["POST"])
 def get_project_details(token, session_id):
+    app.logger.debug(f"token {token}")
     query_text = request.json.get("text", None)
     playground = request.json.get("playground", None)
     project = get_project(token, session_id)

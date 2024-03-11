@@ -37,12 +37,13 @@ import shutil
 from celery import Celery
 from unidecode import unidecode
 from dotenv import load_dotenv
+from telegram_bot.routes.telegram_routes import telegram_routes
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
-
+app.register_blueprint(telegram_routes)
 def make_celery(app):
     celery = Celery(
         app.import_name,

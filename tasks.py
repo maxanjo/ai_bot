@@ -1,4 +1,5 @@
 from functions import process_set_vector_index
+from telegram_tasks import run_bot
 from myapp import celery
 import os
 import logging
@@ -18,11 +19,24 @@ import os
 
 
 headers = {
-        'Origin': 'https://api-guru.ru',
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
-        
-    }
+    'Origin': 'https://api-guru.ru',
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
+}
+
+def run_bot_script(api_key, token):
+    import telegram_script
+    telegram_script.run_bot(api_key, token)
+
+@celery.task()
+def create_bot_task(api_key, token):
+    from multiprocessing import Process
+    # Create a new process for the bot script
+    bot_process = Process(target=run_bot_script, args=(api_key, token))
+    bot_pid = bot_process.pid  # Access PID before starting
+    # Detach the process from the main process
+    bot_process.daemon = True
+    bot_process.start()
 
 
 @celery.task()

@@ -1,3 +1,7 @@
 /env
 /projects
+/telegram_bot/telegram_logs
+/__pycache__
+/telegram_bot/routes/__pycache__
+/telegram_bot/__pycache__
 .env

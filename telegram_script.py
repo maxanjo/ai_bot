@@ -43,8 +43,8 @@ def handle_message(update, context):
     # Example: response_from_api = requests.post('YOUR_API_ENDPOINT', json={'message': user_message}).json()
     update.message.reply_text('hi')
 
-def run_bot(apiKey):
-    logger = setup_logger('asdf')
+def run_bot(apiKey, token):
+    logger = setup_logger(token)
     logger.info("Bot has started")
     """Runs the bot in an infinite loop with error handling."""
     def handle_sigterm(sig, frame):
@@ -92,4 +92,4 @@ def run_bot(apiKey):
 
 if __name__ == '__main__':
     apiKey = '7033603371:AAHd2VujKY8q3IyezStP5X43wBAh9Dfd5qI'  # Replace with your actual apiKey
-    run_bot(apiKey)
+    run_bot(apiKey, 'token')

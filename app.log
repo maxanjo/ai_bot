@@ -1935,3 +1935,13 @@ DEBUG:celery.utils.functional:
 def chunks(task, it, n):
     return 1
 
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:05:24] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:09:13] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:14:41] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:19:06] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:22:27] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:27:51] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:28:46] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:29:48] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:30:57] "POST /create_bot HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 12:40:39] "POST /create_bot HTTP/1.1" 200 -

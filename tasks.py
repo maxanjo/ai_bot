@@ -1,10 +1,8 @@
-from functions import process_set_vector_index
-
+from functions import process_set_vector_index, run_bot, setup_logger
 from myapp import celery
 import os
-
-
 import requests
+
 #Set index with DATA folder
 @celery.task(bind=True)
 def set_vector_index_task(self, token):
@@ -21,17 +19,12 @@ headers = {
     'Authorization': f'Bearer {os.environ.get("FLASK_API_TOKEN")}'
 }
 
-def run_bot_script(api_key, token):
-    import telegram_script
-    telegram_script.run_bot(api_key, token)
+
 
 @celery.task()
 def create_bot_task(api_key, token):
-    from telegram_tasks import start_bot
-    try:
-        start_bot(api_key, token)
-    except Exception as e:
-        logger.error(f"An error occurred while running the bot: {e}")
+    run_bot(api_key, token)
+    
 
 @celery.task()
 def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):

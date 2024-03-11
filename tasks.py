@@ -2,11 +2,8 @@ from functions import process_set_vector_index
 from telegram_tasks import run_bot
 from myapp import celery
 import os
-import logging
 
-# Configure the logging module
-logging.basicConfig(filename='app.log', level=logging.DEBUG)
-logging.debug('This is a debug message')
+
 import requests
 #Set index with DATA folder
 @celery.task(bind=True)
@@ -30,14 +27,41 @@ def run_bot_script(api_key, token):
 
 @celery.task()
 def create_bot_task(api_key, token):
+    from telegram_script import setup_logger
     from multiprocessing import Process
-    # Create a new process for the bot script
-    bot_process = Process(target=run_bot_script, args=(api_key, token))
-    bot_pid = bot_process.pid  # Access PID before starting
-    # Detach the process from the main process
-    bot_process.daemon = True
-    bot_process.start()
+    try:
+        logger = setup_logger(token)
+        logger.info(f"Initilizing process")
+        # Create a new process for the bot script
+        bot_process = Process(target=run_bot_script, args=(api_key, token))
+        
 
+        # Access PID before starting
+        # Detach the process from the main process
+        bot_process.daemon = True
+        bot_process.start()
+        bot_pid = bot_process.pid
+        logger.info(f"Created bot process with PID {bot_pid}")
+        logger.info("Bot process started")
+        terminate_running_processes(token)  
+    except Exception as e:
+        logger.error(f"An error occurred while running the bot: {e}")
+
+running_processes = []
+def terminate_running_processes(token):
+    from telegram_script import setup_logger
+    logger = setup_logger(token)
+    for process in running_processes:
+        try:
+            logger.info(f"Bot process {process.pid}")
+            process.terminate()
+            logger.info(f"Terminated process with PID {process.pid}")
+        except ProcessLookupError:
+            # Process might have already terminated
+            pass
+
+    # Clear the list of running processes
+    running_processes.clear()
 
 @celery.task()
 def send_chat_request(user_id, project_id, session, total_tokens, answer, context, playground):

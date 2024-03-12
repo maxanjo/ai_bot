@@ -1965,3 +1965,21 @@ INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 18:20:37] "POST /create_bot HTTP/1.1" 2
 INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 18:21:50] "POST /create_bot HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 19:36:44] "POST /create_bot HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [11/Mar/2024 19:38:03] "POST /create_bot HTTP/1.1" 200 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 21:13:39] "[31m[1mPOST /start-bot HTTP/1.1[0m" 400 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 21:14:46] "[31m[1mPOST /start-bot HTTP/1.1[0m" 400 -

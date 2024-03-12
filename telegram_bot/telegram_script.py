@@ -1,7 +1,7 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.error import TelegramError
 import requests
-import setup_logger from functions
+import database_utils from functions
 import os
 from requests.exceptions import RequestException
 import logging

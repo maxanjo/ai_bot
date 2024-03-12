@@ -1,6 +1,8 @@
 from flask import Blueprint
 from flask import Flask, request, jsonify
 from database_utils import get_telegram_bot, setup_logger
+import os
+import logging
 import subprocess
 telegram_routes = Blueprint('telegram_routes', __name__)
 

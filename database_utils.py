@@ -25,6 +25,8 @@ def get_telegram_bot(api_key):
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, (api_key))
             project = cursor.fetchone()
+            if project is None:
+                raise Exception("No rows found for the given API key.")
             return project
     except mysql.connector.Error as error:
         print("Error while retrieving project details: {}".format(error))

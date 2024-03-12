@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import os
+import logging
 import sys
 
 import requests
@@ -23,7 +24,7 @@ def get_telegram_bot(api_key):
                 WHERE tb.api_key = %s
             """
             cursor = connection.cursor(dictionary=True)
-            cursor.execute(query, (api_key))
+            cursor.execute(query, (api_key,))
             project = cursor.fetchone()
             if project is None:
                 raise Exception("No rows found for the given API key.")

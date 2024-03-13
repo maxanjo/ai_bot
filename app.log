@@ -107,3 +107,20 @@ Traceback (most recent call last):
     ^^^^^^
 UnboundLocalError: cannot access local variable 'logger' where it is not associated with a value
 INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 21:48:22] "[35m[1mPOST /service-status HTTP/1.1[0m" 500 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 21:50:52] "[31m[1mPOST /service-status HTTP/1.1[0m" 400 -
+DEBUG:myapp:Flask app started
+DEBUG:myapp:Flask app started
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [13/Mar/2024 16:03:02] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Mar/2024 16:03:02] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+DEBUG:myapp:Flask app started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m

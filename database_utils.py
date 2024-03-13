@@ -18,7 +18,7 @@ def get_telegram_bot(api_key):
             #p.api, p.product_data, p.website, p.id, u.left_tokens, p.description, ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
             query = """
                 SELECT 
-                    tb.*, p.id
+                    tb.*, p.id AS project_id, p.token
                 FROM telegram_bots tb
                 LEFT JOIN projects p ON p.id = tb.project_id    
                 WHERE tb.api_key = %s

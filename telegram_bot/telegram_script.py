@@ -1,13 +1,16 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.error import TelegramError
 import requests
-import database_utils from functions
+from database_utils import get_telegram_bot, setup_logger
 import os
 from requests.exceptions import RequestException
 import logging
 import signal
 import time
 import argparse
+
+mainLogger = setup_logger('telegram_bot/logs',f'logs')
+
 
 def start(update, context):
     """Sends a message when the command /start is issued."""
@@ -16,12 +19,42 @@ def start(update, context):
 def handle_message(update, context):
     """Handles user messages by sending them to your API and replying with the API's response."""
     user_message = update.message.text
+    chat_id = update.effective_chat.id
+    token = context.bot_data['token'] # Replace with your actual API token
+
+    api_url = f"{os.environ.get('DOMAIN')}/projects/{token}/{chat_id}"
+
+    # Send a request to the API
+    response = requests.post(api_url, json={'text': user_message})
+    if response.status_code == 200:
+        api_response = response.json()
+        mainLogger.info(api_response)
+        mainLogger.info(api_response['result'])
+
+        # Handle the API response
+        update.message.reply_text(api_response['result'])
+    else:
+        mainLogger.info(api_response['An error occurred while processing your request.'])
+        update.message.reply_text('An error occurred while processing your request.')
     # Placeholder for API call
     # Example: response_from_api = requests.post('YOUR_API_ENDPOINT', json={'message': user_message}).json()
-    update.message.reply_text('hi')
+    update.message.reply_text(response.result)
 
-def run_bot(apiKey, token):
-    logger = setup_logger('telegram_bot/logs',token)
+def run_bot(apiKey):
+    try:
+        project_details = get_telegram_bot(api_key)
+    except Exception as e:
+        mainLogger.info(f"Failed to get project and run_bot script for {apiKey}")
+        return
+
+    project_id = project_details['project_id']
+    bot_status = project_details['status']
+    token = project_details['token']
+    logger = setup_logger('telegram_bot/logs',f'project_{project_id}')
+    if bot_status == 0:
+        logger.info(f"Bot status is disabled. The bot has not started")
+        return
+
     logger.info("Bot has started")
     """Runs the bot in an infinite loop with error handling."""
     def handle_sigterm(sig, frame):
@@ -35,6 +68,8 @@ def run_bot(apiKey, token):
         dp = updater.dispatcher
         dp.add_handler(CommandHandler("start", start))
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+        context = dp.bot.context
+        context.bot_data['token'] = token
         updater.start_polling()
         updater.idle()
     except RequestException as e:

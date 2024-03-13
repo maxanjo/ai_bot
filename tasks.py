@@ -1,4 +1,4 @@
-from functions import process_set_vector_index, run_bot, setup_logger
+from functions import process_set_vector_index
 from myapp import celery
 import os
 import requests

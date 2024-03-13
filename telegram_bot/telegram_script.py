@@ -2,9 +2,15 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.error import TelegramError
 import requests
 import sys
-sys.path.append('../api')
-from database_utils import get_telegram_bot, setup_logger
 import os
+from dotenv import load_dotenv
+load_dotenv()
+if os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
+    sys.path.append('../api')
+else:
+    sys.path.append('../ai_bot')
+from database_utils import get_telegram_bot, setup_logger
+
 from requests.exceptions import RequestException
 import logging
 import signal

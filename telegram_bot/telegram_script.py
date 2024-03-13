@@ -1,6 +1,8 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.error import TelegramError
 import requests
+import sys
+sys.path.append('../api')
 from database_utils import get_telegram_bot, setup_logger
 import os
 from requests.exceptions import RequestException
@@ -20,31 +22,29 @@ def handle_message(update, context):
     """Handles user messages by sending them to your API and replying with the API's response."""
     user_message = update.message.text
     chat_id = update.effective_chat.id
-    token = context.bot_data['token'] # Replace with your actual API token
+    token = context.bot_data['token']
+    project_id = context.bot_data['project_id'] 
 
     api_url = f"{os.environ.get('DOMAIN')}/projects/{token}/{chat_id}"
-
+    logger = setup_logger('telegram_bot/logs',f'project_{project_id}')
     # Send a request to the API
     response = requests.post(api_url, json={'text': user_message})
+    logger.info(response)
+
     if response.status_code == 200:
         api_response = response.json()
-        mainLogger.info(api_response)
-        mainLogger.info(api_response['result'])
-
+        logger.info(api_response['result'])
         # Handle the API response
         update.message.reply_text(api_response['result'])
     else:
-        mainLogger.info(api_response['An error occurred while processing your request.'])
+        logger.error('An error occurred while processing your request.')
         update.message.reply_text('An error occurred while processing your request.')
-    # Placeholder for API call
-    # Example: response_from_api = requests.post('YOUR_API_ENDPOINT', json={'message': user_message}).json()
-    update.message.reply_text(response.result)
-
-def run_bot(apiKey):
+    
+def run_bot(api_key):
     try:
         project_details = get_telegram_bot(api_key)
     except Exception as e:
-        mainLogger.info(f"Failed to get project and run_bot script for {apiKey}")
+        mainLogger.error(f"Failed to get project and run_bot script for {api_key}. {e}")
         return
 
     project_id = project_details['project_id']
@@ -64,12 +64,12 @@ def run_bot(apiKey):
     signal.signal(signal.SIGTERM, handle_sigterm)
     
     try:
-        updater = Updater(apiKey, use_context=True)
+        updater = Updater(api_key, use_context=True)
         dp = updater.dispatcher
+        dp.bot_data['token'] = token
+        dp.bot_data['project_id'] = project_id
         dp.add_handler(CommandHandler("start", start))
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
-        context = dp.bot.context
-        context.bot_data['token'] = token
         updater.start_polling()
         updater.idle()
     except RequestException as e:
@@ -109,5 +109,5 @@ def parse_arguments():
     return parser.parse_args()
 
 if __name__ == '__main__':
-    args = parse_arguments()
-    run_bot(args.api_key, args.token)
+    # args = parse_arguments()
+    run_bot("7033603371:AAHd2VujKY8q3IyezStP5X43wBAh9Dfd5qI")

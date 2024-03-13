@@ -3,8 +3,36 @@ from mysql.connector import Error
 import os
 import logging
 import sys
-
+from dotenv import load_dotenv
+load_dotenv()
 import requests
+
+def setup_logger(log_dir, filename):
+    # Create the logs directory if it doesn't exist
+    
+    os.makedirs(log_dir, exist_ok=True)
+
+    # Create a log file for the specific filename
+    log_file = os.path.join(log_dir, f'{filename}.log')
+
+    # Configure logging
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    # Create a file handler for the log file
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.INFO)
+
+    # Create a formatter for the log messages
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+
+    # Add the file handler to the logger
+    logger.addHandler(file_handler)
+
+    return logger
+
+mainLogger = setup_logger('telegram_bot/logs', f'logs')
 
 def get_telegram_bot(api_key):
     connection = mysql.connector.connect(
@@ -30,7 +58,7 @@ def get_telegram_bot(api_key):
                 raise Exception("No rows found for the given API key.")
             return project
     except mysql.connector.Error as error:
-        print("Error while retrieving project details: {}".format(error))
+        raise Exception("Error while retrieving project details: {}".format(error))
     finally:
         if connection.is_connected():
             cursor.close()
@@ -76,27 +104,3 @@ def get_project(token, session_id = None):
             cursor.close()
             connection.close()
 
-def setup_logger(log_dir, filename):
-    # Create the logs directory if it doesn't exist
-    
-    os.makedirs(log_dir, exist_ok=True)
-
-    # Create a log file for the specific filename
-    log_file = os.path.join(log_dir, f'{filename}.log')
-
-    # Configure logging
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-
-    # Create a file handler for the log file
-    file_handler = logging.FileHandler(log_file)
-    file_handler.setLevel(logging.INFO)
-
-    # Create a formatter for the log messages
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-
-    # Add the file handler to the logger
-    logger.addHandler(file_handler)
-
-    return logger

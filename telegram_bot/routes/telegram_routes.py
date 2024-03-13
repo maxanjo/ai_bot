@@ -7,6 +7,29 @@ import os
 telegram_routes = Blueprint('telegram_routes', __name__)
 
 
+@app.route('/logs/<api_key>', methods=['GET'])
+def get_logs(api_key):
+    api_key = request.json.get('api-key')
+    project_details, service_path, error_response = get_project_details_and_service_path(api_key)
+
+    if error_response:
+        return error_response
+
+    project_id = project_details['project_id']
+    try:
+        log_file_path = f"logs/project_{project_id}.log"
+        if not os.path.isfile(log_file_path):
+            return jsonify({'error': f'Log file not found for project ID {project_id}'}), 404
+
+        with open(log_file_path, 'r') as log_file:
+            log_lines = log_file.readlines()
+
+        last_10_lines = log_lines[-10:]
+        return jsonify({'logs': last_10_lines})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @telegram_routes.route("/start-bot", methods=["POST"])
 def start_bot():
     api_key = request.json.get('api-key')

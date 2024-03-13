@@ -30,16 +30,14 @@ def handle_message(update, context):
     chat_id = update.effective_chat.id
     token = context.bot_data['token']
     project_id = context.bot_data['project_id'] 
-
+    logger = context.bot_data['logger']
     api_url = f"{os.environ.get('DOMAIN')}/projects/{token}/{chat_id}"
     logger = setup_logger('telegram_bot/logs',f'project_{project_id}')
     # Send a request to the API
     response = requests.post(api_url, json={'text': user_message})
-    logger.info(response)
 
     if response.status_code == 200:
         api_response = response.json()
-        logger.info(api_response['result'])
         # Handle the API response
         update.message.reply_text(api_response['result'])
     else:
@@ -74,6 +72,7 @@ def run_bot(api_key):
         dp = updater.dispatcher
         dp.bot_data['token'] = token
         dp.bot_data['project_id'] = project_id
+        dp.bot_data['logger'] = logger
         dp.add_handler(CommandHandler("start", start))
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
         updater.start_polling()

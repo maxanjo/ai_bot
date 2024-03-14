@@ -34,7 +34,6 @@ def handle_message(update, context):
     project_id = context.bot_data['project_id']
     logger = context.bot_data['logger']
     api_url = f"{os.environ.get('DOMAIN')}/projects/{token}/{chat_id}"
-    logger = setup_logger('telegram_bot/logs',f'project_{project_id}')
     # Send a request to the API
     website = context.bot_data['website']
     headers = {
@@ -48,6 +47,7 @@ def handle_message(update, context):
         update.message.reply_text(api_response['result'])
     else:
         logger.error('An error occurred while processing your request.')
+        mainLogger.error(f'Error in project_id={project_id}. An error occurred while processing your request.')
         update.message.reply_text('An error occurred while processing your request.')
     
 def run_bot(api_key):
@@ -108,10 +108,12 @@ def run_bot(api_key):
         logger.error(f"Telegram API error: {e}")
         # Handle Telegram-specific errors (e.g., rate limits)
     except OSError as e:
-        logger.error(f"Process-related error: {e}")
+        logger.error(f"Process-related error")
+        mainLogger.error(f"Error in project_id={project_id}. Process-related error")
         # Potentially critical error. Decide on action: retry, log, or exit.
     except Exception as e:
-        logger.error(f"An unexpected error occurred: {e}")
+        logger.error(f"An unexpected error occurred")
+        mainLogger.error(f"Error in project_id={project_id}. An unexpected error occurred: {e}")
         # General catch-all for unexpected errors
     finally:
         # Clean-up actions, if any
@@ -120,9 +122,8 @@ def run_bot(api_key):
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Run a Telegram bot.')
     parser.add_argument('--api-key', help='The Telegram Bot API key.', required=True)
-    parser.add_argument('--token', help='The token for the bot.', required=True)
     return parser.parse_args()
 
 if __name__ == '__main__':
-    # args = parse_arguments()
-    run_bot("7033603371:AAHd2VujKY8q3IyezStP5X43wBAh9Dfd5qI")
+    args = parse_arguments()
+    run_bot(args.api_key)

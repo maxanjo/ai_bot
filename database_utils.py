@@ -32,8 +32,6 @@ def setup_logger(log_dir, filename):
 
     return logger
 
-mainLogger = setup_logger('telegram_bot/logs', f'logs')
-
 def get_telegram_bot(api_key):
     connection = mysql.connector.connect(
         host=os.environ['HOST'],
@@ -46,7 +44,7 @@ def get_telegram_bot(api_key):
             #p.api, p.product_data, p.website, p.id, u.left_tokens, p.description, ai.temperature, ai.model, ai.prompt, ai.response_mode, p.user_id
             query = """
                 SELECT 
-                    tb.*, p.id AS project_id, p.token
+                    tb.*, p.id AS project_id, p.website, p.token
                 FROM telegram_bots tb
                 LEFT JOIN projects p ON p.id = tb.project_id    
                 WHERE tb.api_key = %s

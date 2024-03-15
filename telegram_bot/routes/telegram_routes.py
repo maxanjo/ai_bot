@@ -86,9 +86,6 @@ def remove_bot():
         logger.error('Error stopping service.')
         mainLogger.error(f'Error in project_id={project_id}.Error in stopping service: {e.output}')
         return jsonify({'error': f'Error stopping service.'}), 500
-    log_file_path = f"telegram_bot/logs/project_{project_id}"
-    if os.path.isfile(log_file_path):
-        os.remove(log_file_path)
     service_file_path = f"/etc/systemd/system/telegram_bot_{project_id}.service"
     if os.path.isfile(service_file_path):
         os.remove(service_file_path)
@@ -131,11 +128,10 @@ def restart_bot():
     try:
         # Stop the bot
         subprocess.run(['sudo', 'systemctl', 'stop', f'telegram_bot_{project_id}.service'])
-        logger.info(f'Service stopped')
 
         # Restart the bot
         subprocess.run(['sudo', 'systemctl', 'restart', f'telegram_bot_{project_id}.service'])
-        logger.info(f'Service restarted')
+        logger.info(f'Service restarted successfully')
 
         return jsonify({'result': f'Service restarted successfully'})
 

@@ -74,10 +74,7 @@ def stop_bot():
 @telegram_routes.route("/remove-bot", methods=["POST"])
 def remove_bot():
     api_key = request.json.get('api-key')
-    project_details, service_path, error_response = get_project_details_and_service_path(api_key)
-
-    if error_response:
-        return jsonify({'error': error_response}), 400
+    project_details = get_telegram_bot(api_key)
     project_id = project_details['project_id']
     logger = setup_logger('telegram_bot/logs', f'project_{project_id}')
 

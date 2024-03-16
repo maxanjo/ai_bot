@@ -13,7 +13,7 @@ def get_logs(api_key):
     project_details, service_path, error_response = get_project_details_and_service_path(api_key)
 
     if error_response:
-        return error_response
+        return jsonify({'error': error_response}), 400
 
     project_id = project_details['project_id']
     try:
@@ -58,7 +58,7 @@ def stop_bot():
     api_key = request.json.get('api-key')
     project_details, service_path, error_response = get_project_details_and_service_path(api_key)
     if error_response:
-        return error_response
+        return jsonify({'error': error_response}), 400
     project_id = project_details['project_id']
     logger = setup_logger('telegram_bot/logs', f'project_{project_id}')
 
@@ -75,13 +75,15 @@ def stop_bot():
 def remove_bot():
     api_key = request.json.get('api-key')
     project_details, service_path, error_response = get_project_details_and_service_path(api_key)
+
     if error_response:
-        return error_response
+        return jsonify({'error': error_response}), 400
     project_id = project_details['project_id']
     logger = setup_logger('telegram_bot/logs', f'project_{project_id}')
 
     try:
-        subprocess.run(['sudo', 'systemctl', 'stop', f'telegram_bot_{project_id}.service'])
+        if os.path.isfile(f'telegram_bot_{project_id}.service'):
+            subprocess.run(['sudo', 'systemctl', 'stop', f'telegram_bot_{project_id}.service'])
     except subprocess.CalledProcessError as e:
         logger.error('Error stopping service.')
         mainLogger.error(f'Error in project_id={project_id}.Error in stopping service: {e.output}')
@@ -100,7 +102,7 @@ def service_status():
     api_key = request.json.get('api-key')
     project_details, service_path, error_response = get_project_details_and_service_path(api_key)
     if error_response:
-        return error_response
+        return jsonify({'error': error_response}), 400
     project_id = project_details['project_id']
     logger = setup_logger('telegram_bot/logs', f'project_{project_id}')
 
@@ -120,7 +122,7 @@ def restart_bot():
     project_details, service_path, error_response = get_project_details_and_service_path(api_key)
 
     if error_response:
-        return error_response
+        return jsonify({'error': error_response}), 400
 
     project_id = project_details['project_id']
     logger = setup_logger('telegram_bot/logs', f'project_{project_id}')
@@ -183,8 +185,7 @@ def service_file_exists(service_file):
 
 def get_project_details_and_service_path(api_key):
     if not api_key:
-        return jsonify({'error': 'Missing api_key in request body'}), 400
-
+        return None, None, "No api-key is provided"
     try:
         project_details = get_telegram_bot(api_key)
         project_id = project_details['project_id']
@@ -192,7 +193,7 @@ def get_project_details_and_service_path(api_key):
         return project_details, service_path, None
 
     except FileNotFoundError as e:
-        return None, None, jsonify({'error': str(e)}), 404
+        return None, None, f"Service not found: {str(e)}"
 
     except Exception as e:
-        return None, None, jsonify({'error': f"An unexpected error occurred: {e}"}), 400
+        return None, None, f"An unexpected error occurred: {e}"

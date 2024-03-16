@@ -58,11 +58,14 @@ def run_bot(api_key):
         return
 
     project_id = project_details['project_id']
+    bot_status = project_details['status']
     start_message = project_details['start_message']
     website = project_details['website']
     token = project_details['token']
     logger = setup_logger('telegram_bot/logs',f'project_{project_id}')
-
+    if bot_status == 0:
+        logger.info(f"Bot status is disabled. The bot has not started")
+        return
 
     logger.info("Bot has started")
     """Runs the bot in an infinite loop with error handling."""
